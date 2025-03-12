@@ -1,0 +1,191 @@
+/* Định nghĩa font chữ */
+@font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css?family=Inter');
+  }
+  
+  /* Định nghĩa màu sắc */
+  :root {
+    --primary-color: #3498db;
+    --secondary-color: #f1c40f;
+    --background-color: #005EB5;
+    --text-color: #333;
+  }
+  
+  /* Định nghĩa bố cục */
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  footer, header {
+    background-color: var(--background-color);
+    color: #fff;
+    padding-top: 5px;
+    padding-left: 10px;
+    text-align: left;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 3%;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .logo span {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+  }
+  
+  .left-side {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Căn trái */
+    justify-content: center;
+    max-width: 100%;
+    padding-top: 100px;
+  }
+  
+  .slogan {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .slogan img {
+    width: 60%;
+    height: auto;
+    transform: scaleX(-1);
+  }
+  
+  .slogan p {
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+    top: -70px;
+    left: -150px;
+  }
+
+  .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    width: 50%; /* Chỉnh lại width cho phù hợp */
+
+    padding-top: 100px;
+    padding-right: 30px;
+    text-align: center; /* Căn giữa văn bản */
+  }
+  .login-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    top: -150px;
+    right: -190px;
+    position: relative;
+
+}
+  .auth-form {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 50%;
+    height: auto;
+    max-width: 100%;
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Thêm thuộc tính này */
+  }
+  
+  .input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-field .icon {
+    margin-right: 10px;
+  }
+
+.submit-form {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: var(--background-color);
+    font-weight: bold;
+    border: 2px solid var(--background-color);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.submit-form:hover {
+  background-color: var(--background-color);
+  color: #fff;
+}
+
+.input-field, .forgot-password, .submit-form {
+    margin: 0 20px; /* Thêm thuộc tính này */
+}
+
+.forgot-password {
+    text-align: right;
+    font-size: 12px;
+    right: 0;
+  }
+  
+  .forgot-password a {
+    color: #005EB5;
+    text-decoration: none;
+}
+
+  .introduction {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .chat-bubble {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  

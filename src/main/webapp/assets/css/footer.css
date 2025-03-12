@@ -1,0 +1,36 @@
+footer {
+    background-color: var(--card);
+    color: var(--card-foreground);
+    margin-top: 2rem;
+    padding: 2rem 0;
+}
+
+footer h5 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+footer ul {
+    padding-left: 0;
+}
+
+footer ul li {
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+
+footer ul li a {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    footer .row {
+        text-align: center;
+    }
+}
