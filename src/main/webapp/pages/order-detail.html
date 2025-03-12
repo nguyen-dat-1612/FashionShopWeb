@@ -1,0 +1,233 @@
+<!-- order-detail.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng - Fashion Store</title>
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/orders.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS bổ sung để đồng bộ với orders.css */
+        .order-info {
+            background-color: #f9f1e7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .order-info p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #666;
+        }
+        .order-info p strong {
+            color: #333;
+        }
+        .order-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .order-items-table th, .order-items-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .order-items-table th {
+            background-color: #f9f1e7;
+            color: #666;
+            font-weight: 600;
+        }
+        .order-total {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .btn-cancel {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            font-size: 14px; /* Đồng bộ kích thước chữ */
+        }
+        .btn-cancel:hover {
+            background-color: #b02a37;
+        }
+        .btn-back {
+            background-color: #d4a373;
+            border: none;
+            color: #fff;
+            padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 14px; /* Đồng bộ kích thước chữ */
+        }
+        .btn-back:hover {
+            background-color: #b88a5d;
+        }
+        #cancel-order-section {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu (giữ nguyên từ orders.html) -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>FASHION <span>STYLE</span></h2>
+            </div>
+            <ul>
+                <li id="profile">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword">MẬT KHẨU</li>
+                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
+                <li class="active">DANH SÁCH ĐƠN HÀNG</li>
+                <li id="verification">XÁC MINH TÀI KHOẢN</li>
+                <li id="logout">ĐĂNG XUẤT</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>CHI TIẾT ĐƠN HÀNG</h2>
+            <div class="order-detail-section">
+                <div class="order-info">
+                    <p><strong>Mã đơn hàng:</strong> <span id="order-id"></span></p>
+                    <p><strong>Ngày đặt:</strong> <span id="order-date"></span></p>
+                    <p><strong>Trạng thái:</strong> <span id="order-status"></span></p>
+                </div>
+                <table class="order-items-table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Kích thước</th>
+                            <th>Màu sắc</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-items"></tbody>
+                </table>
+                <p class="order-total"><strong>Tổng tiền:</strong> <span id="order-total"></span></p>
+                <div id="cancel-order-section"></div>
+                <button class="btn-back" onclick="window.location.href='/src/main/webapp/pages/orders.html'">Quay lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu giả lập (thêm kích thước và màu sắc)
+        const orders = [
+            {
+                orderId: "DH001",
+                date: "2025-03-10",
+                total: 450000,
+                status: "pending",
+                items: [
+                    { name: "Áo thun trắng", size: "M", color: "Trắng", quantity: 2, price: 150000 },
+                    { name: "Quần jeans xanh", size: "L", color: "Xanh đậm", quantity: 1, price: 150000 }
+                ]
+            },
+            {
+                orderId: "DH002",
+                date: "2025-03-09",
+                total: 800000,
+                status: "shipped",
+                items: [
+                    { name: "Giày sneaker đen", size: "42", color: "Đen", quantity: 1, price: 800000 }
+                ]
+            }
+        ];
+
+        function formatPrice(price) {
+            return price.toLocaleString('vi-VN') + " VNĐ";
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                "pending": "Đang xử lý",
+                "shipped": "Đang giao",
+                "delivered": "Đã giao",
+                "cancelled": "Đã hủy"
+            };
+            return statusMap[status] || "Không xác định";
+        }
+
+        function loadOrderDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get("id");
+            const order = orders.find(o => o.orderId === orderId);
+
+            if (!order) {
+                document.querySelector(".main-content").innerHTML = "<p>Đơn hàng không tồn tại.</p>";
+                return;
+            }
+
+            document.getElementById("order-id").textContent = order.orderId;
+            document.getElementById("order-date").textContent = order.date;
+            document.getElementById("order-status").textContent = getStatusText(order.status);
+            document.getElementById("order-total").textContent = formatPrice(order.total);
+
+            const tbody = document.getElementById("order-items");
+            tbody.innerHTML = "";
+            order.items.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.size}</td>
+                    <td>${item.color}</td>
+                    <td>${item.quantity}</td>
+                    <td>${formatPrice(item.price)}</td>
+                    <td>${formatPrice(item.price * item.quantity)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            const cancelSection = document.getElementById("cancel-order-section");
+            cancelSection.innerHTML = "";
+            if (order.status === "pending") {
+                const cancelButton = document.createElement("button");
+                cancelButton.className = "btn-cancel";
+                cancelButton.textContent = "Hủy đơn hàng";
+                cancelButton.onclick = () => cancelOrder(order.orderId);
+                cancelSection.appendChild(cancelButton);
+            }
+        }
+
+        function cancelOrder(orderId) {
+            const order = orders.find(o => o.orderId === orderId);
+            if (order && confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
+                order.status = "cancelled";
+                alert("Đơn hàng đã được hủy!");
+                window.location.href = "/src/main/webapp/pages/orders.html";
+            }
+        }
+
+        // Tải chi tiết đơn hàng khi trang được tải
+        document.addEventListener("DOMContentLoaded", loadOrderDetails);
+
+        // Sự kiện điều hướng sidebar
+        const sidebarLinks = {
+            "profile": "/src/main/webapp/pages/profile.html",
+            "changePassword": "/src/main/webapp/pages/change-password.html",
+            "promotions": "/src/main/webapp/pages/promotions.html",
+            "verification": "/src/main/webapp/pages/verification.html",
+            "logout": "/src/main/webapp/pages/logout.html"
+        };
+
+        Object.keys(sidebarLinks).forEach(id => {
+            document.getElementById(id)?.addEventListener("click", () => {
+                window.location.href = sidebarLinks[id];
+            });
+        });
+    </script>
+</body>
+</html>

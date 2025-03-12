@@ -1,19 +1,26 @@
 // orders.js
 // Giả lập dữ liệu từ API
 const fetchOrdersData = async () => {
-    // Thay bằng API thật của bạn
+    // Thay bằng API thật của bạn nếu cần
     const data = [
         {
             orderId: "DH001",
             date: "2025-03-10",
-            total: 1500000,
-            status: "pending"
+            total: 450000,
+            status: "pending",
+            items: [
+                { name: "Áo thun trắng", quantity: 2, price: 150000 },
+                { name: "Quần jeans xanh", quantity: 1, price: 150000 }
+            ]
         },
         {
             orderId: "DH002",
             date: "2025-03-09",
-            total: 2500000,
-            status: "shipped"
+            total: 800000,
+            status: "shipped",
+            items: [
+                { name: "Giày sneaker đen", quantity: 1, price: 800000 }
+            ]
         },
         {
             orderId: "DH003",
@@ -43,18 +50,9 @@ const displayOrders = (orders) => {
             <td>${order.date}</td>
             <td>${order.total.toLocaleString('vi-VN')} VNĐ</td>
             <td><span class="status ${order.status}">${getStatusText(order.status)}</span></td>
-            <td><button class="detail-btn" data-order-id="${order.orderId}">Xem chi tiết</button></td>
+            <td><a href="/src/main/webapp/pages/order-detail.html?id=${order.orderId}" class="detail-btn">Xem chi tiết</a></td>
         `;
         ordersList.appendChild(row);
-    });
-
-    // Thêm sự kiện cho nút chi tiết
-    document.querySelectorAll(".detail-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const orderId = btn.getAttribute("data-order-id");
-            alert(`Xem chi tiết đơn hàng ${orderId} (Chức năng giả lập)`);
-            // Có thể chuyển hướng đến trang chi tiết đơn hàng tại đây
-        });
     });
 };
 
