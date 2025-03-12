@@ -36,214 +36,215 @@
         }
 
 
-.deal-section { 
-    margin: 40px 0; 
-}
-.title_deal { 
-    font-size: 20px; 
-    font-weight: 600; 
-    color: #333; 
-    margin-bottom: 15px; 
-}
-.bundle { 
-    border: 1px solid #eee; 
-    border-radius: 10px; 
-    padding: 15px; 
-    background: #fff; 
-    display: flex; 
-    align-items: flex-start; 
-    flex-wrap: wrap; 
-    gap: 15px; 
-}
-.deal-item { 
-    position: relative; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    padding: 10px; 
-    width: 140px; 
-    text-align: center; 
-}
-.main-item { 
-    border-color: #d4a373; 
-}
-.deal-item img { 
-    width: 80px; 
-    height: 80px; 
-    object-fit: cover; 
-    border-radius: 5px; 
-    margin-bottom: 5px; 
-}
-.deal-item input[type="checkbox"] { 
-    position: absolute; 
-    top: 5px; 
-    left: 5px; 
-}
-.deal-info { 
-    position: relative; 
-}
-.deal-name { 
-    font-size: 12px; 
-    margin: 0; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-}
-.deal-name .open-popup { 
-    background: none; 
-    border: none; 
-    font-size: 14px; 
-    cursor: pointer; 
-}
-.deal-label { 
-    position: absolute; 
-    top: -30px; 
-    right: 5px; 
-    background: #ff4d4f; 
-    color: #fff; 
-    font-size: 10px; 
-    padding: 2px 5px; 
-    border-radius: 3px; 
-}
-.deal-label span { 
-    margin-left: 3px; 
-}
-.original-price { 
-    font-size: 12px; 
-    color: #999; 
-    text-decoration: line-through; 
-    margin: 2px 0; 
-}
-.deal-price { 
-    font-size: 14px; 
-    color: #d4a373; 
-    margin: 2px 0; 
-}
-.option-hover { 
-    display: none; 
-    position: absolute; 
-    top: 100%; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    background: #fff; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    padding: 10px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    z-index: 10; 
-    width: 120px; 
-}
-.deal-info:hover .option-hover { 
-    display: block; 
-}
-.option-hover .color-options, .option-hover .size-options { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 5px; 
-    margin-top: 5px; 
-}
-.option-hover label { 
-    font-size: 12px; 
-    font-weight: 600; 
-}
-.option-hover .color-option, .option-hover .size-option { 
-    font-size: 12px; 
-    padding: 3px 5px; 
-    border: 1px solid #ddd; 
-    border-radius: 3px; 
-    background: none; 
-    cursor: pointer; 
-}
-.option-hover .color-option.active, .option-hover .size-option.active { 
-    background: #d4a373; 
-    color: #fff; 
-    border-color: #d4a373; 
-}
-.plus-sign { 
-    font-size: 24px; 
-    color: #666; 
-    align-self: center; 
-}
-.bundle-items { 
-    flex: 2; 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 15px; 
-}
-.bundle-summary { 
-    width: 100%; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-top: 15px; 
-    padding-top: 15px; 
-    border-top: 1px solid #eee; 
-}
-.bundle-summary p { 
-    margin: 0; 
-    font-size: 14px; 
-}
-.bundle-summary span { 
-    color: #d4a373; 
-    font-weight: 600; 
-}
-.btn-deal { 
-    background-color: #d4a373; 
-    border-color: #d4a373; 
-    color: #fff; 
-    padding: 8px 15px; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease; 
-}
-.btn-deal:hover { 
-    background-color: #b88a5d; 
-    border-color: #b88a5d; 
-}
-@media (max-width: 768px) {
-    .bundle { 
-        flex-direction: column; 
-    }
-    .main-item { 
-        margin-bottom: 15px; 
-    }
-    .plus-sign { 
-        display: none; 
-    }
-    .bundle-items { 
-        justify-content: center; 
-    }
-    .deal-item { 
-        width: 120px; 
-    }
-    .deal-item img { 
-        width: 60px; 
-        height: 60px; 
-    }
-    .bundle-summary { 
-        flex-direction: column; 
-        gap: 10px; 
-    }
-    .selected-options {
-        font-size: 12px;
-        color: #666;
-        margin-top: 5px;
-    }
-    .main-options {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-        width: 120px;
-    }
-    .deal-info:hover .main-options {
-        display: block;
-    }
+        .deal-section { 
+            margin: 40px 0; 
+        }
+        .title_deal { 
+            font-size: 20px; 
+            font-weight: 600; 
+            color: #333; 
+            margin-bottom: 15px; 
+        }
+        .bundle { 
+            border: 1px solid #eee; 
+            border-radius: 10px; 
+            padding: 15px; 
+            background: #fff; 
+            display: flex; 
+            align-items: flex-start; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        }
+        .deal-item { 
+            position: relative; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: 140px; 
+            text-align: center; 
+        }
+        .main-item { 
+            border-color: #d4a373; 
+        }
+        .deal-item img { 
+            width: 80px; 
+            height: 80px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            margin-bottom: 5px; 
+        }
+        .deal-item input[type="checkbox"] { 
+            position: absolute; 
+            top: 5px; 
+            left: 5px; 
+        }
+        .deal-info { 
+            position: relative; 
+        }
+        .deal-name { 
+            font-size: 12px; 
+            margin: 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .deal-name .open-popup { 
+            background: none; 
+            border: none; 
+            font-size: 14px; 
+            cursor: pointer; 
+        }
+        .deal-label { 
+            position: absolute; 
+            top: -30px; 
+            right: 5px; 
+            background: #ff4d4f; 
+            color: #fff; 
+            font-size: 10px; 
+            padding: 2px 5px; 
+            border-radius: 3px; 
+        }
+        .deal-label span { 
+            margin-left: 3px; 
+        }
+        .original-price { 
+            font-size: 12px; 
+            color: #999; 
+            text-decoration: line-through; 
+            margin: 2px 0; 
+        }
+        .deal-price { 
+            font-size: 14px; 
+            color: #d4a373; 
+            margin: 2px 0; 
+        }
+        .option-hover { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            padding: 10px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+            z-index: 10; 
+            width: 120px; 
+        }
+        .deal-info:hover .option-hover { 
+            display: block; 
+        }
+        .option-hover .color-options, .option-hover .size-options { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+            margin-top: 5px; 
+        }
+        .option-hover label { 
+            font-size: 12px; 
+            font-weight: 600; 
+        }
+        .option-hover .color-option, .option-hover .size-option { 
+            font-size: 12px; 
+            padding: 3px 5px; 
+            border: 1px solid #ddd; 
+            border-radius: 3px; 
+            background: none; 
+            cursor: pointer; 
+        }
+        .option-hover .color-option.active, .option-hover .size-option.active { 
+            background: #d4a373; 
+            color: #fff; 
+            border-color: #d4a373; 
+        }
+        .plus-sign { 
+            font-size: 24px; 
+            color: #666; 
+            align-self: center; 
+        }
+        .bundle-items { 
+            flex: 2; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        }
+        .bundle-summary { 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 15px; 
+            padding-top: 15px; 
+            border-top: 1px solid #eee; 
+        }
+        .bundle-summary p { 
+            margin: 0; 
+            font-size: 14px; 
+        }
+        .bundle-summary span { 
+            color: #d4a373; 
+            font-weight: 600; 
+        }
+        .btn-deal { 
+            background-color: #d4a373; 
+            border-color: #d4a373; 
+            color: #fff; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s ease; 
+        }
+        .btn-deal:hover { 
+            background-color: #b88a5d; 
+            border-color: #b88a5d; 
+        }
+        @media (max-width: 768px) {
+            .bundle { 
+                flex-direction: column; 
+            }
+            .main-item { 
+                margin-bottom: 15px; 
+            }
+            .plus-sign { 
+                display: none; 
+            }
+            .bundle-items { 
+                justify-content: center; 
+            }
+            .deal-item { 
+                width: 120px; 
+            }
+            .deal-item img { 
+                width: 60px; 
+                height: 60px; 
+            }
+            .bundle-summary { 
+                flex-direction: column; 
+                gap: 10px; 
+            }
+            .selected-options {
+                font-size: 12px;
+                color: #666;
+                margin-top: 5px;
+            }
+            .main-options {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 10;
+                width: 120px;
+            }
+            .deal-info:hover .main-options {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -318,7 +319,6 @@
             </div>
         </div>
     </main>
-    <!-- Deal sản phẩm -->
     <!-- Deal sản phẩm -->
     <section class="deal-section">
         <h3 class="title_deal">Mua thêm deal sốc</h3>
@@ -471,190 +471,203 @@
                 }
             ]
         };
-
         document.addEventListener("DOMContentLoaded", function() {
-            // Lấy ID sản phẩm từ URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = parseInt(urlParams.get('id')) || 1;
-            const product = mockApi.products.find(p => p.id === productId);
+        // Lấy ID sản phẩm từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id')) || 1;
+        const product = mockApi.products.find(p => p.id === productId);
 
-            if (product) {
-                // Hiển thị thông tin sản phẩm
-                document.getElementById("productImage").src = product.image;
-                document.getElementById("productName").textContent = product.name;
-                document.getElementById("productPrice").textContent = product.price;
-                document.getElementById("productStock").textContent = `Số lượng còn: ${product.stock}`;
-                document.getElementById("productRating").textContent = `Đánh giá: ${product.rating}/5 (${product.reviews} lượt đánh giá)`;
-                document.getElementById("productDescription").textContent = product.description;
+        if (product) {
+            // Hiển thị thông tin sản phẩm
+            document.getElementById("productImage").src = product.image;
+            document.getElementById("productName").textContent = product.name;
+            document.getElementById("productPrice").textContent = product.price;
+            document.getElementById("productStock").textContent = `Số lượng còn: ${product.stock}`;
+            document.getElementById("productRating").textContent = `Đánh giá: ${product.rating}/5 (${product.reviews} lượt đánh giá)`;
+            document.getElementById("productDescription").textContent = product.description;
 
-                // Tạo tùy chọn màu sắc
-                const colorOptions = document.getElementById("colorOptions");
-                product.colors.forEach((color, index) => {
-                    const btn = document.createElement("button");
-                    btn.className = "color-btn";
-                    btn.textContent = color;
-                    if (index === 0) btn.classList.add("active");
-                    btn.onclick = () => toggleOption(btn, colorOptions);
-                    colorOptions.appendChild(btn);
-                });
+            // Khởi tạo biến lưu trữ lựa chọn
+            let selectedColor = product.colors[0]; // Mặc định chọn màu đầu tiên
+            let selectedSize = product.sizes[0];   // Mặc định chọn kích thước đầu tiên
 
-                // Tạo tùy chọn kích thước
-                const sizeOptions = document.getElementById("sizeOptions");
-                product.sizes.forEach((size, index) => {
-                    const btn = document.createElement("button");
-                    btn.className = "size-btn";
-                    btn.textContent = size;
-                    if (index === 0) btn.classList.add("active");
-                    btn.onclick = () => toggleOption(btn, sizeOptions);
-                    sizeOptions.appendChild(btn);
-                });
-
-                // Tăng giảm số lượng
-                const quantityInput = document.getElementById("quantity");
-                document.getElementById("decreaseQty").onclick = () => {
-                    let value = parseInt(quantityInput.value);
-                    if (value > 1) quantityInput.value = value - 1;
-                };
-                document.getElementById("increaseQty").onclick = () => {
-                    let value = parseInt(quantityInput.value);
-                    if (value < product.stock) quantityInput.value = value + 1;
-                };
-
-                // Thêm vào giỏ hàng
-                document.getElementById("addToCartBtn").onclick = () => {
-                    let cartCount = parseInt(document.getElementById("cartCount").textContent);
-                    cartCount += parseInt(quantityInput.value);
-                    document.getElementById("cartCount").textContent = cartCount;
-                    document.getElementById("cartIcon").classList.remove("d-none");
-                    alert(`Đã thêm ${quantityInput.value} ${product.name} vào giỏ hàng!`);
-                };
-
-                // Mua ngay
-                document.getElementById("buyNowBtn").onclick = () => {
-                    alert(`Đặt mua ${quantityInput.value} ${product.name} thành công! (Chức năng giả lập)`);
-                    window.location.href = "/src/main/webapp/pages/checkout.html"; // Chuyển hướng đến trang thanh toán (giả lập)
-                };
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Giá sản phẩm chính
-            const mainPrice = 180000;
-            let totalPrice = mainPrice;
-            let totalDiscount = 0;
-
-            const comboTotal = document.getElementById("comboTotal");
-            const comboDiscount = document.getElementById("comboDiscount");
-
-            // Xử lý sản phẩm chính
-            const mainItem = document.querySelector('.main-item');
-            const mainColorOptions = mainItem.querySelectorAll('.color-option');
-            const mainSizeOptions = mainItem.querySelectorAll('.size-option');
-            let mainSelectedColor = mainColorOptions[0]?.textContent || "Đỏ";
-            let mainSelectedSize = mainSizeOptions[0]?.textContent || "S";
-
-            mainColorOptions.forEach((btn, index) => {
-                if (index === 0) btn.classList.add('active');
+            // Tạo tùy chọn màu sắc
+            const colorOptions = document.getElementById("colorOptions");
+            product.colors.forEach((color, index) => {
+                const btn = document.createElement("button");
+                btn.className = "color-btn";    
+                btn.textContent = color;
+                if (index === 0) btn.classList.add("active");
                 btn.onclick = () => {
-                    toggleOption(btn, mainItem.querySelector('.color-options'));
-                    mainSelectedColor = btn.textContent;
-                    updateMainSelectedOptions();
+                    toggleOption(btn, colorOptions);
+                    selectedColor = color; // Cập nhật màu đã chọn
                 };
+                colorOptions.appendChild(btn);
             });
 
-            mainSizeOptions.forEach((btn, index) => {
-                if (index === 0) btn.classList.add('active');
+            // Tạo tùy chọn kích thước
+            const sizeOptions = document.getElementById("sizeOptions");
+            product.sizes.forEach((size, index) => {
+                const btn = document.createElement("button");
+                btn.className = "size-btn";
+                btn.textContent = size;
+                if (index === 0) btn.classList.add("active");
                 btn.onclick = () => {
-                    toggleOption(btn, mainItem.querySelector('.size-options'));
-                    mainSelectedSize = btn.textContent;
-                    updateMainSelectedOptions();
+                    toggleOption(btn, sizeOptions);
+                    selectedSize = size; // Cập nhật kích thước đã chọn
                 };
+                sizeOptions.appendChild(btn);
             });
 
-            function updateMainSelectedOptions() {
-                document.getElementById("mainSelectedOptions").textContent = 
-                    `Đã chọn: ${mainSelectedColor} - ${mainSelectedSize}`;
-            }
-            updateMainSelectedOptions();
-
-            // Xử lý sản phẩm đính kèm
-            const checkboxes = document.querySelectorAll('.deal-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateDealPrice);
-
-                const dealItem = checkbox.closest('.deal-item');
-                const colorOptions = dealItem.querySelectorAll('.color-option');
-                const sizeOptions = dealItem.querySelectorAll('.size-option');
-                let selectedBundleColor = colorOptions[0]?.textContent || "Đen";
-                let selectedBundleSize = sizeOptions[0]?.textContent || "S";
-
-                colorOptions.forEach((btn, index) => {
-                    if (index === 0) btn.classList.add('active');
-                    btn.onclick = () => {
-                        toggleOption(btn, dealItem.querySelector('.color-options'));
-                        selectedBundleColor = btn.textContent;
-                        updateBundleSelectedOptions(dealItem);
-                    };
-                });
-
-                sizeOptions.forEach((btn, index) => {
-                    if (index === 0) btn.classList.add('active');
-                    btn.onclick = () => {
-                        toggleOption(btn, dealItem.querySelector('.size-options'));
-                        selectedBundleSize = btn.textContent;
-                        updateBundleSelectedOptions(dealItem);
-                    };
-                });
-
-                function updateBundleSelectedOptions(item) {
-                    item.querySelector('.selected-options').textContent = 
-                        `Đã chọn: ${selectedBundleColor} - ${selectedBundleSize}`;
-                }
-                updateBundleSelectedOptions(dealItem);
-            });
-
-            // Hàm cập nhật giá
-            function updateDealPrice() {
-                totalPrice = mainPrice;
-                totalDiscount = 0;
-
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        const dealPrice = parseInt(checkbox.dataset.price);
-                        const originalPrice = parseInt(checkbox.dataset.original);
-                        totalPrice += dealPrice;
-                        totalDiscount += (originalPrice - dealPrice);
-                    }
-                });
-
-                comboTotal.textContent = totalPrice.toLocaleString('vi-VN') + ' VNĐ';
-                comboDiscount.textContent = totalDiscount.toLocaleString('vi-VN') + ' VNĐ';
-            }
-
-            // Xử lý nút mua deal
-            document.getElementById("addComboBtn").onclick = () => {
-                const selectedItems = Array.from(checkboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => {
-                        const dealItem = cb.closest('.deal-item');
-                        const name = dealItem.querySelector('.deal-name').textContent.replace('🎨', '').trim();
-                        const options = dealItem.querySelector('.selected-options').textContent;
-                        return `${name} (${options.replace('Đã chọn: ', '')})`;
-                    });
-                const mainOptions = document.getElementById("mainSelectedOptions").textContent;
-                const message = selectedItems.length > 0 
-                    ? `Đã thêm deal: Bộ quần áo đá bóng Arsenal (${mainOptions.replace('Đã chọn: ', '')}) + ${selectedItems.join(', ')} vào giỏ hàng!`
-                    : `Đã thêm deal: Bộ quần áo đá bóng Arsenal (${mainOptions.replace('Đã chọn: ', '')}) vào giỏ hàng!`;
-                alert(message);
+            // Tăng giảm số lượng
+            const quantityInput = document.getElementById("quantity");
+            document.getElementById("decreaseQty").onclick = () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) quantityInput.value = value - 1;
+            };
+            document.getElementById("increaseQty").onclick = () => {
+                let value = parseInt(quantityInput.value);
+                if (value < product.stock) quantityInput.value = value + 1;
             };
 
-            // Hàm chọn tùy chọn
-            function toggleOption(selectedBtn, container) {
-                const buttons = container.getElementsByTagName("button");
-                for (let btn of buttons) btn.classList.remove("active");
-                selectedBtn.classList.add("active");
-            }
+            // Thêm vào giỏ hàng
+            document.getElementById("addToCartBtn").onclick = () => {
+                let cartCount = parseInt(document.getElementById("cartCount").textContent);
+                cartCount += parseInt(quantityInput.value);
+                document.getElementById("cartCount").textContent = cartCount;
+                document.getElementById("cartIcon").classList.remove("d-none");
+                alert(`Đã thêm ${quantityInput.value} ${product.name} (${selectedColor}, ${selectedSize}) vào giỏ hàng!`);
+            };
+
+            // Mua ngay
+            document.getElementById("buyNowBtn").onclick = () => {
+                const cartItem = [{
+                    id: product.id,
+                    name: product.name,
+                    price: parseInt(product.price.replace('.', '').replace(' VNĐ', '')),
+                    quantity: parseInt(quantityInput.value),
+                    color: selectedColor,
+                    size: selectedSize,
+                    image: product.image
+                }];
+                localStorage.setItem('cartItems', JSON.stringify(cartItem));
+                alert(`Đặt mua ${quantityInput.value} ${product.name} (${selectedColor}, ${selectedSize}) thành công! (Chức năng giả lập)`);
+                window.location.href = "/src/main/webapp/pages/checkout.html";
+            };
+        }
+
+        // Hàm chọn tùy chọn
+        function toggleOption(selectedBtn, container) {
+            const buttons = container.getElementsByTagName("button");
+            for (let btn of buttons) btn.classList.remove("active");
+            selectedBtn.classList.add("active");
+        }
+
+        // Xử lý deal sản phẩm (giữ nguyên logic hiện tại của bạn)
+        const mainPrice = 180000;
+        let totalPrice = mainPrice;
+        let totalDiscount = 0;
+
+        const comboTotal = document.getElementById("comboTotal");
+        const comboDiscount = document.getElementById("comboDiscount");
+
+        const mainItem = document.querySelector('.main-item');
+        const mainColorOptions = mainItem.querySelectorAll('.color-option');
+        const mainSizeOptions = mainItem.querySelectorAll('.size-option');
+        let mainSelectedColor = mainColorOptions[0]?.textContent || "Đỏ";
+        let mainSelectedSize = mainSizeOptions[0]?.textContent || "S";
+
+        mainColorOptions.forEach((btn, index) => {
+            if (index === 0) btn.classList.add('active');
+            btn.onclick = () => {
+                toggleOption(btn, mainItem.querySelector('.color-options'));
+                mainSelectedColor = btn.textContent;
+                updateMainSelectedOptions();
+            };
         });
+
+        mainSizeOptions.forEach((btn, index) => {
+            if (index === 0) btn.classList.add('active');
+            btn.onclick = () => {
+                toggleOption(btn, mainItem.querySelector('.size-options'));
+                mainSelectedSize = btn.textContent;
+                updateMainSelectedOptions();
+            };
+        });
+
+        function updateMainSelectedOptions() {
+            document.getElementById("mainSelectedOptions").textContent = 
+                `Đã chọn: ${mainSelectedColor} - ${mainSelectedSize}`;
+        }
+        updateMainSelectedOptions();
+
+        const checkboxes = document.querySelectorAll('.deal-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateDealPrice);
+
+            const dealItem = checkbox.closest('.deal-item');
+            const colorOptions = dealItem.querySelectorAll('.color-option');
+            const sizeOptions = dealItem.querySelectorAll('.size-option');
+            let selectedBundleColor = colorOptions[0]?.textContent || "Đen";
+            let selectedBundleSize = sizeOptions[0]?.textContent || "S";
+
+            colorOptions.forEach((btn, index) => {
+                if (index === 0) btn.classList.add('active');
+                btn.onclick = () => {
+                    toggleOption(btn, dealItem.querySelector('.color-options'));
+                    selectedBundleColor = btn.textContent;
+                    updateBundleSelectedOptions(dealItem);
+                };
+            });
+
+            sizeOptions.forEach((btn, index) => {
+                if (index === 0) btn.classList.add('active');
+                btn.onclick = () => {
+                    toggleOption(btn, dealItem.querySelector('.size-options'));
+                    selectedBundleSize = btn.textContent;
+                    updateBundleSelectedOptions(dealItem);
+                };
+            });
+
+            function updateBundleSelectedOptions(item) {
+                item.querySelector('.selected-options').textContent = 
+                    `Đã chọn: ${selectedBundleColor} - ${selectedBundleSize}`;
+            }
+            updateBundleSelectedOptions(dealItem);
+        });
+
+        function updateDealPrice() {
+            totalPrice = mainPrice;
+            totalDiscount = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const dealPrice = parseInt(checkbox.dataset.price);
+                    const originalPrice = parseInt(checkbox.dataset.original);
+                    totalPrice += dealPrice;
+                    totalDiscount += (originalPrice - dealPrice);
+                }
+            });
+
+            comboTotal.textContent = totalPrice.toLocaleString('vi-VN') + ' VNĐ';
+            comboDiscount.textContent = totalDiscount.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        document.getElementById("addComboBtn").onclick = () => {
+            const selectedItems = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => {
+                    const dealItem = cb.closest('.deal-item');
+                    const name = dealItem.querySelector('.deal-name').textContent.replace('🎨', '').trim();
+                    const options = dealItem.querySelector('.selected-options').textContent;
+                    return `${name} (${options.replace('Đã chọn: ', '')})`;
+                });
+            const mainOptions = document.getElementById("mainSelectedOptions").textContent;
+            const message = selectedItems.length > 0 
+                ? `Đã thêm deal: Bộ quần áo đá bóng Arsenal (${mainOptions.replace('Đã chọn: ', '')}) + ${selectedItems.join(', ')} vào giỏ hàng!`
+                : `Đã thêm deal: Bộ quần áo đá bóng Arsenal (${mainOptions.replace('Đã chọn: ', '')}) vào giỏ hàng!`;
+            alert(message);
+        };
+    });
     </script>
 </body>
 </html>
