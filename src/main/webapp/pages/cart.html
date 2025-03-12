@@ -1,3 +1,4 @@
+<!-- cart.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="/src/main/webapp/assets/css/cart.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar (giữ nguyên) -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/src/main/webapp/pages/home.html">FASHION <span>STYLE</span></a>
@@ -25,8 +26,6 @@
                     <li class="nav-item"><a class="nav-link" href="#">Giày</a></li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-primary me-2 d-none" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
-                    <button class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
                     <div class="profile-icon" id="profileIcon">
                         <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" alt="Profile" class="avatar-img">
                     </div>
@@ -44,6 +43,10 @@
         <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
         <div class="row">
             <div class="col-lg-8">
+                <div class="mb-3">
+                    <input type="checkbox" id="select-all" checked onchange="toggleSelectAll()">
+                    <label for="select-all" class="ms-2">Chọn tất cả</label>
+                </div>
                 <div id="cart-items"></div>
             </div>
             <div class="col-lg-4">
@@ -72,7 +75,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (giữ nguyên) -->
     <footer class="site-footer">
         <div class="container">
             <div class="row">
@@ -120,7 +123,8 @@
                     {name: "Đỏ", code: "#e74c3c"},
                     {name: "Đen", code: "#2c3e50"}
                 ],
-                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg"
+                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
+                selected: true // Thêm thuộc tính selected
             },
             { 
                 id: 2, 
@@ -135,7 +139,8 @@
                     {name: "Đen", code: "#2c3e50"},
                     {name: "Xám", code: "#7f8c8d"}
                 ],
-                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg"
+                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
+                selected: true // Thêm thuộc tính selected
             }
         ];
 
@@ -147,12 +152,19 @@
             const cartContainer = document.getElementById('cart-items');
             cartContainer.innerHTML = '';
             let subtotal = 0;
+            let selectedCount = 0;
 
             cartItems.forEach(item => {
-                subtotal += item.price * item.quantity;
+                if (item.selected) {
+                    subtotal += item.price * item.quantity;
+                    selectedCount++;
+                }
                 const itemElement = document.createElement('div');
                 itemElement.className = 'cart-item d-flex align-items-center';
                 itemElement.innerHTML = `
+                    <div class="cart-item-select me-3">
+                        <input type="checkbox" class="item-checkbox" data-id="${item.id}" ${item.selected ? 'checked' : ''} onchange="toggleItem(${item.id})">
+                    </div>
                     <div class="cart-item-image me-3">
                         <img src="${item.image}" class="img-fluid product-img" alt="${item.name}">
                     </div>
@@ -197,7 +209,25 @@
             document.getElementById('subtotal').textContent = formatPrice(subtotal);
             document.getElementById('shipping').textContent = formatPrice(30000);
             document.getElementById('total').textContent = formatPrice(subtotal + 30000);
-            document.getElementById('cartCount').textContent = cartItems.length;
+            document.getElementById('cartCount').textContent = selectedCount;
+
+            // Cập nhật trạng thái checkbox "Chọn tất cả"
+            const selectAllCheckbox = document.getElementById('select-all');
+            selectAllCheckbox.checked = cartItems.every(item => item.selected);
+        }
+
+        function toggleItem(itemId) {
+            const item = cartItems.find(item => item.id === itemId);
+            if (item) {
+                item.selected = !item.selected;
+                updateCart();
+            }
+        }
+
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('select-all');
+            cartItems.forEach(item => item.selected = selectAllCheckbox.checked);
+            updateCart();
         }
 
         function updateQuantity(itemId, change) {
