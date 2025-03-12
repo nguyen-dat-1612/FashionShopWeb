@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Cá Nhân - Fashion Store</title>
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>FASHION <span>STYLE</span></h2>
+            </div>
+            <ul>
+                <li class="active">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword">MẬT KHẨU</li>
+                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
+                <li id="orders">DANH SÁCH ĐƠN HÀNG</li>
+                <li id="verification">XÁC MINH TÀI KHOẢN</li>
+                <li id="logout">ĐĂNG XUẤT</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>THÔNG TIN CÁ NHÂN</h2>
+            <div class="profile-section">
+                <div class="avatar">
+                    <img src="https://via.placeholder.com/150" alt="Avatar" id="avatar-img">
+                    <button class="edit-btn">Chỉnh sửa ảnh</button>
+                </div>
+                <div class="profile-info">
+                    <div class="info-row">
+                        <label>Mã khách hàng</label>
+                        <span id="customer-id">KH23010122277</span>
+                    </div>
+                    <div class="info-row">
+                        <label>Họ và tên</label>
+                        <input type="text" id="full-name" readonly>
+                    </div>
+                    <div class="info-row">
+                        <label>Tên hiển thị</label>
+                        <input type="text" id="display-name" readonly>
+                    </div>
+                    <div class="info-row">
+                        <label>Giới tính</label>
+                        <select id="gender" disabled>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="info-row">
+                        <label>Số điện thoại</label>
+                        <input type="text" id="phone" readonly>
+                        <span class="status not-verified">Xác minh ngay</span>
+                    </div>
+                    <div class="info-row">
+                        <label>Email</label>
+                        <input type="email" id="email" readonly>
+                        <span class="status verified">Đã xác minh</span>
+                    </div>
+                    <div class="info-row">
+                        <label>Chiều cao</label>
+                        <input type="range" id="height" min="100" max="200" readonly>
+                        <span id="height-value">155cm</span>
+                    </div>
+                    <div class="info-row">
+                        <label>Cân nặng</label>
+                        <input type="range" id="weight" min="30" max="100" readonly>
+                        <span id="weight-value">50kg</span>
+                    </div>
+                    <div class="info-row">
+                        <label>Địa chỉ giao hàng</label>
+                        <input type="text" id="delivery-info" readonly>
+                    </div>
+                    <button class="save-btn">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/main/webapp/assets/js/profile.js"></script>
+
+    <script>
+        document.getElementById("changePassword").addEventListener("click", function() {
+            window.location.href = "/src/main/webapp/pages/change-password.html";
+        });
+    </script>
+</body>
+</html>

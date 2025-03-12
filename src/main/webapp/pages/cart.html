@@ -3,112 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng Nâng cao</title>
-    <!-- Bootstrap CSS -->
+    <title>Giỏ Hàng - Fashion Style</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .cart-item {
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            padding: 25px 30px; /* Tăng padding để kéo dài và rộng hơn */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .cart-item:hover {
-            transform: translateY(-2px);
-        }
-        .quantity-controls button {
-            width: 35px;
-        }
-        .size-select, .color-select {
-            max-width: 100px;
-        }
-        .summary-card {
-            position: sticky;
-            top: 20px;
-            border-radius: 10px;
-        }
-        .product-img {
-            border-radius: 8px;
-            object-fit: cover;
-            width: 100px; /* Đảm bảo ảnh không quá nhỏ */
-            height: 100px;
-        }
-        .color-box {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-        .color-container {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .price-column {
-            padding-right: 15px; /* Tăng padding để giá không sát viền */
-            min-width: 120px; /* Tăng min-width để có thêm không gian */
-        }
-        /* Điều chỉnh khoảng cách giữa các cột */
-        .cart-item .row > div {
-            padding: 0 10px; /* Thêm padding cho các cột */
-        }
-        @media (max-width: 800px) {
-            .price-column {
-                min-width: auto;
-                padding-right: 0;
-            }
-            .cart-item {
-                padding: 15px; /* Giảm padding trên mobile */
-            }
-            .cart-item .row > div {
-                padding: 0 5px; /* Giảm padding trên mobile */
-            }
-            .product-img {
-                width: 80px;
-                height: 80px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/cart.css">
 </head>
 <body>
-    <div class="container py-5">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/src/main/webapp/pages/home.html">FASHION <span>STYLE</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/src/main/webapp/pages/home.html">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quần</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Áo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Phụ Kiện</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giày</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-primary me-2 d-none" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
+                    <button class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
+                    <div class="profile-icon" id="profileIcon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" alt="Profile" class="avatar-img">
+                    </div>
+                    <div class="cart-icon" id="cartIcon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" class="cart-img">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-5">
         <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
-        
         <div class="row">
             <div class="col-lg-8">
                 <div id="cart-items"></div>
             </div>
-            
             <div class="col-lg-4">
                 <div class="card summary-card">
                     <div class="card-body">
                         <h5 class="card-title">Thông tin đơn hàng</h5>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Tạm tính:</span>
-                            <span id="subtotal">0đ</span>
+                            <span id="subtotal">0 VNĐ</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Phí vận chuyển:</span>
-                            <span id="shipping">30,000đ</span>
+                            <span id="shipping">30,000 VNĐ</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold mb-3">
                             <span>Tổng cộng:</span>
-                            <span id="total">0đ</span>
+                            <span id="total">0 VNĐ</span>
                         </div>
-                        <button class="btn btn-success w-100" onclick="alert('Chức năng thanh toán đang phát triển!')">
+                        <button class="btn btn-primary w-100" onclick="alert('Chức năng thanh toán đang phát triển!')">
                             Thanh Toán Ngay
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Về Fashion Style</h4>
+                    <p>Chúng tôi mang đến những sản phẩm thời trang chất lượng, phong cách và hiện đại để bạn luôn tự tin tỏa sáng.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="/src/main/webapp/pages/home.html">Trang Chủ</a></li>
+                        <li><a href="#">Sản Phẩm</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="#">Chính Sách</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Liên Hệ</h4>
+                    <p>Email: support@fashionstyle.com</p>
+                    <p>Hotline: 0909 123 456</p>
+                    <p>Địa chỉ: 123 Đường Thời Trang, TP. HCM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Fashion Style. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -146,79 +138,68 @@
                 image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg"
             }
         ];
-    
+
         function formatPrice(price) {
-            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
+            return price.toLocaleString('vi-VN') + " VNĐ";
         }
-    
+
         function updateCart() {
             const cartContainer = document.getElementById('cart-items');
             cartContainer.innerHTML = '';
-    
             let subtotal = 0;
-    
+
             cartItems.forEach(item => {
                 subtotal += item.price * item.quantity;
-    
                 const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
+                itemElement.className = 'cart-item d-flex align-items-center';
                 itemElement.innerHTML = `
-                    <div class="row align-items-center">
-                        <div class="col-md-2 col-3">
-                            <img src="${item.image}" class="img-fluid product-img" alt="${item.name}">
-                        </div>
-                        <div class="col-md-3 col-9">
-                            <h5 class="mb-1">${item.name}</h5>
-                            <small class="text-muted">Đơn giá: ${formatPrice(item.price)}</small>
-                        </div>
-                        <div class="col-md-2 col-4">
-                            <select class="form-select size-select" 
-                                    onchange="updateSize(${item.id}, this.value)">
-                                ${item.availableSizes.map(size => 
-                                    `<option value="${size}" ${size === item.size ? 'selected' : ''}>
-                                        ${size}
-                                    </option>`
+                    <div class="cart-item-image me-3">
+                        <img src="${item.image}" class="img-fluid product-img" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details flex-grow-1">
+                        <h5 class="mb-1">${item.name}</h5>
+                        <small class="text-muted">Đơn giá: ${formatPrice(item.price)}</small>
+                    </div>
+                    <div class="cart-item-options me-3">
+                        <select class="form-select size-select" onchange="updateSize(${item.id}, this.value)">
+                            ${item.availableSizes.map(size => 
+                                `<option value="${size}" ${size === item.size ? 'selected' : ''}>${size}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="cart-item-options me-3">
+                        <div class="color-container">
+                            <select class="form-select color-select" onchange="updateColor(${item.id}, this.value)">
+                                ${item.availableColors.map(color => 
+                                    `<option value="${color.name}" ${color.name === item.color ? 'selected' : ''}>${color.name}</option>`
                                 ).join('')}
                             </select>
+                            <span class="color-box" style="background-color: ${item.availableColors.find(c => c.name === item.color).code}"></span>
                         </div>
-                        <div class="col-md-2 col-4">
-                            <div class="color-container">
-                                <select class="form-select color-select" 
-                                        onchange="updateColor(${item.id}, this.value)">
-                                    ${item.availableColors.map(color => 
-                                        `<option value="${color.name}" ${color.name === item.color ? 'selected' : ''}>
-                                            ${color.name}
-                                        </option>`
-                                    ).join('')}
-                                </select>
-                                <span class="color-box" 
-                                      style="background-color: ${item.availableColors.find(c => c.name === item.color).code}">
-                                </span>
-                            </div>
+                    </div>
+                    <div class="cart-item-quantity me-3">
+                        <div class="quantity-controls">
+                            <button class="btn btn-outline-primary" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="px-2">${item.quantity}</span>
+                            <button class="btn btn-outline-primary" onclick="updateQuantity(${item.id}, 1)">+</button>
                         </div>
-                        <div class="col-md-2 col-4">
-                            <div class="quantity-controls">
-                                <button class="btn btn-outline-primary" 
-                                        onclick="updateQuantity(${item.id}, -1)">-</button>
-                                <span class="px-2">${item.quantity}</span>
-                                <button class="btn btn-outline-primary" 
-                                        onclick="updateQuantity(${item.id}, 1)">+</button>
-                            </div>
-                        </div>
-                        <div class="col-md-1 col-2 ">
-                            <span class="fw-bold">${formatPrice(item.price * item.quantity)}</span>
-                            <button class="btn btn-danger btn-sm mt-2" 
-                                    onclick="removeItem(${item.id})">Xóa</button>
-                        </div>
+                    </div>
+                    <div class="cart-item-total me-3">
+                        <span class="fw-bold">${formatPrice(item.price * item.quantity)}</span>
+                    </div>
+                    <div class="cart-item-action">
+                        <button class="btn btn-danger btn-sm" onclick="removeItem(${item.id})">Xóa</button>
                     </div>
                 `;
                 cartContainer.appendChild(itemElement);
             });
-    
+
             document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('shipping').textContent = formatPrice(30000);
             document.getElementById('total').textContent = formatPrice(subtotal + 30000);
+            document.getElementById('cartCount').textContent = cartItems.length;
         }
-    
+
         function updateQuantity(itemId, change) {
             const item = cartItems.find(item => item.id === itemId);
             if (item && (item.quantity + change) > 0 && (item.quantity + change) <= 10) {
@@ -226,7 +207,7 @@
                 updateCart();
             }
         }
-    
+
         function updateSize(itemId, newSize) {
             const item = cartItems.find(item => item.id === itemId);
             if (item) {
@@ -234,7 +215,7 @@
                 updateCart();
             }
         }
-    
+
         function updateColor(itemId, newColor) {
             const item = cartItems.find(item => item.id === itemId);
             if (item) {
@@ -242,7 +223,7 @@
                 updateCart();
             }
         }
-    
+
         function removeItem(itemId) {
             const index = cartItems.findIndex(item => item.id === itemId);
             if (index !== -1) {
@@ -250,9 +231,17 @@
                 updateCart();
             }
         }
-    
-        // Initial render
-        updateCart();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            updateCart();
+
+            document.getElementById("profileIcon").addEventListener("click", function() {
+                window.location.href = "/src/main/webapp/pages/profile.html";
+            });
+            document.getElementById("cartIcon").addEventListener("click", function() {
+                window.location.href = "/src/main/webapp/pages/cart.html";
+            });
+        });
     </script>
 </body>
 </html>

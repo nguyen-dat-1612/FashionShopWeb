@@ -1,0 +1,67 @@
+<!-- orders.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Đơn Hàng - Fashion Store</title>
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/order.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>FASHION <span>STYLE</span></h2>
+            </div>
+            <ul>
+                <li id="profile">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword">MẬT KHẨU</li>
+                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
+                <li class="active">DANH SÁCH ĐƠN HÀNG</li>
+                <li id="verification">XÁC MINH TÀI KHOẢN</li>
+                <li id="logout">ĐĂNG XUẤT</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>DANH SÁCH ĐƠN HÀNG</h2>
+            <div class="orders-section">
+                <div class="filter-bar">
+                    <select id="order-status-filter">
+                        <option value="all">Tất cả</option>
+                        <option value="pending">Đang xử lý</option>
+                        <option value="shipped">Đang giao</option>
+                        <option value="delivered">Đã giao</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-list"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/main/webapp/assets/js/order.js"></script>
+    <script>
+        document.getElementById("profile").addEventListener("click", function() {
+            window.location.href = "/src/main/webapp/pages/profile.html";
+        });
+        document.getElementById("changePassword").addEventListener("click", function() {
+            window.location.href = "/src/main/webapp/pages/change-password.html";
+        });
+    </script>
+</body>
+</html>
