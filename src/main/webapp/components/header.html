@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/src/main/webapp/assets/css/header.css">
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">FASHION <span>STYLE</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="/src/main/webapp/pages/home.html">Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quần</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Áo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Phụ Kiện</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giày</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
+                    <div class="profile-icon d-none" id="profileIcon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" alt="Profile" class="avatar-img">
+                    </div>
+                    <!-- Biểu tượng giỏ hàng -->
+                    <div class="cart-icon d-none" id="cartIcon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" class="cart-img">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>

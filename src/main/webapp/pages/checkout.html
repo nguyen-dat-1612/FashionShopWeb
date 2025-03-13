@@ -452,7 +452,9 @@
                     const totalPrice = parseInt(document.getElementById("totalPrice").textContent.replace(/\D/g, ''));
                     alert(`Đặt hàng thành công!\nHọ tên: ${fullName}\nSĐT: ${phone}\nEmail: ${email || 'Không có'}\nĐịa chỉ: ${address}\nGhi chú: ${notes || 'Không có'}\nPhương thức thanh toán: ${paymentMethod}\nSản phẩm:\n${orderDetails}\nTổng tiền: ${totalPrice.toLocaleString('vi-VN')} VNĐ`);
                     localStorage.removeItem('cartItems');
-                    window.location.href = "/";
+                    window.location.href = "http://127.0.0.1:5500/src/main/webapp/pages/cart.html";
+
+
                 } else {
                     alert("Vui lòng điền đầy đủ các trường bắt buộc (*)");
                 }
