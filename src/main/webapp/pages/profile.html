@@ -15,10 +15,10 @@
                 <h2>FASHION <span>STYLE</span></h2>
             </div>
             <ul>
-                <li class="active">THÔNG TIN CÁ NHÂN</li>
-                <li id="changePassword">MẬT KHẨU</li>
+                <li class="active" href="/src/main/webapp/pages/profile.html">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword" href="/src/main/webapp/pages/change-password.html">MẬT KHẨU</li>
                 <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
-                <li id="orders">DANH SÁCH ĐƠN HÀNG</li>
+                <li id="orders" href="/src/main/webapp/pages/orders.html">DANH SÁCH ĐƠN HÀNG</li>
                 <li id="verification">XÁC MINH TÀI KHOẢN</li>
                 <li id="logout">ĐĂNG XUẤT</li>
             </ul>
@@ -88,6 +88,9 @@
         document.getElementById("changePassword").addEventListener("click", function() {
             window.location.href = "/src/main/webapp/pages/change-password.html";
         });
+        document.getElementById("orders").addEventListener("click", function() {
+        window.location.href = "/src/main/webapp/pages/orders.html";
+    });
     </script>
 </body>
 </html>

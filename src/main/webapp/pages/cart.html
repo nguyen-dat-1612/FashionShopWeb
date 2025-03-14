@@ -1,277 +1,365 @@
 <!-- cart.html -->
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Giỏ Hàng - Fashion Style</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/main/webapp/assets/css/cart.css">
-</head>
-<body>
-    <!-- Navbar (giữ nguyên) -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/src/main/webapp/pages/home.html">FASHION <span>STYLE</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="/src/main/webapp/pages/home.html">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Quần</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Áo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Phụ Kiện</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Giày</a></li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <div class="profile-icon" id="profileIcon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" alt="Profile" class="avatar-img">
-                    </div>
-                    <div class="cart-icon" id="cartIcon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" class="cart-img">
-                        <span class="cart-count" id="cartCount">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/cart.css" />
+  </head>
+  <body>
+    <div id="header"></div>
     <!-- Main Content -->
     <main class="container py-5">
-        <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="mb-3">
-                    <input type="checkbox" id="select-all" checked onchange="toggleSelectAll()">
-                    <label for="select-all" class="ms-2">Chọn tất cả</label>
-                </div>
-                <div id="cart-items"></div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card summary-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Thông tin đơn hàng</h5>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Tạm tính:</span>
-                            <span id="subtotal">0 VNĐ</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Phí vận chuyển:</span>
-                            <span id="shipping">30,000 VNĐ</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between fw-bold mb-3">
-                            <span>Tổng cộng:</span>
-                            <span id="total">0 VNĐ</span>
-                        </div>
-                        <button class="btn btn-primary w-100" onclick="alert('Chức năng thanh toán đang phát triển!')">
-                            Thanh Toán Ngay
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <h1 class="mb-4 text-center">Giỏ Hàng Của Bạn</h1>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="mb-3">
+            <input
+              type="checkbox"
+              id="select-all"
+              checked
+              onchange="toggleSelectAll()"
+            />
+            <label for="select-all" class="ms-2">Chọn tất cả</label>
+          </div>
+          <div id="cart-items"></div>
         </div>
+        <div class="col-lg-4">
+          <div class="card summary-card">
+            <div class="card-body">
+              <h5 class="card-title">Thông tin đơn hàng</h5>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Tạm tính:</span>
+                <span id="subtotal">0 VNĐ</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Phí vận chuyển:</span>
+                <span id="shipping">30,000 VNĐ</span>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between fw-bold mb-3">
+                <span>Tổng cộng:</span>
+                <span id="total">0 VNĐ</span>
+              </div>
+              <button
+                class="btn btn-primary w-100"
+                onclick="window.location.href='/src/main/webapp/pages/checkout.html'"
+              >
+                Đặt Hàng
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
-
-    <!-- Footer (giữ nguyên) -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Về Fashion Style</h4>
-                    <p>Chúng tôi mang đến những sản phẩm thời trang chất lượng, phong cách và hiện đại để bạn luôn tự tin tỏa sáng.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Liên Kết Nhanh</h4>
-                    <ul class="footer-links">
-                        <li><a href="/src/main/webapp/pages/home.html">Trang Chủ</a></li>
-                        <li><a href="#">Sản Phẩm</a></li>
-                        <li><a href="#">Liên Hệ</a></li>
-                        <li><a href="#">Chính Sách</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4>Liên Hệ</h4>
-                    <p>Email: support@fashionstyle.com</p>
-                    <p>Hotline: 0909 123 456</p>
-                    <p>Địa chỉ: 123 Đường Thời Trang, TP. HCM</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 Fashion Style. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script>
-        const cartItems = [
-            { 
-                id: 1, 
-                name: "Áo thun thời trang", 
-                price: 150000, 
-                quantity: 1, 
-                size: "M",
-                color: "Xanh",
-                availableSizes: ["S", "M", "L", "XL"],
-                availableColors: [
-                    {name: "Xanh", code: "#3498db"},
-                    {name: "Đỏ", code: "#e74c3c"},
-                    {name: "Đen", code: "#2c3e50"}
-                ],
-                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
-                selected: true // Thêm thuộc tính selected
-            },
-            { 
-                id: 2, 
-                name: "Quần jeans cao cấp", 
-                price: 250000, 
-                quantity: 2, 
-                size: "L",
-                color: "Đen",
-                availableSizes: ["M", "L", "XL"],
-                availableColors: [
-                    {name: "Xanh", code: "#2980b9"},
-                    {name: "Đen", code: "#2c3e50"},
-                    {name: "Xám", code: "#7f8c8d"}
-                ],
-                image: "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
-                selected: true // Thêm thuộc tính selected
-            }
-        ];
+      const cartItems = [
+        {
+          id: 1,
+          name: "Áo thun thời trang",
+          price: 150000,
+          quantity: 1,
+          size: "M",
+          color: "Xanh",
+          availableSizes: ["S", "M", "L", "XL"],
+          availableColors: [
+            { name: "Xanh", code: "#3498db" },
+            { name: "Đỏ", code: "#e74c3c" },
+            { name: "Đen", code: "#2c3e50" },
+          ],
+          image:
+            "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
+          selected: true, // Thêm thuộc tính selected
+        },
+        {
+          id: 2,
+          name: "Quần jeans cao cấp",
+          price: 250000,
+          quantity: 2,
+          size: "L",
+          color: "Đen",
+          availableSizes: ["M", "L", "XL"],
+          availableColors: [
+            { name: "Xanh", code: "#2980b9" },
+            { name: "Đen", code: "#2c3e50" },
+            { name: "Xám", code: "#7f8c8d" },
+          ],
+          image:
+            "https://i1.sndcdn.com/artworks-ZbfKdYZBs6IDWBhJ-YxgJhQ-t500x500.jpg",
+          selected: true, // Thêm thuộc tính selected
+        },
+      ];
 
-        function formatPrice(price) {
-            return price.toLocaleString('vi-VN') + " VNĐ";
-        }
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + " VNĐ";
+      }
 
-        function updateCart() {
-            const cartContainer = document.getElementById('cart-items');
-            cartContainer.innerHTML = '';
-            let subtotal = 0;
-            let selectedCount = 0;
+      function updateCart() {
+        const cartContainer = document.getElementById("cart-items");
+        cartContainer.innerHTML = "";
+        let subtotal = 0;
+        let selectedCount = 0;
 
-            cartItems.forEach(item => {
-                if (item.selected) {
-                    subtotal += item.price * item.quantity;
-                    selectedCount++;
-                }
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item d-flex align-items-center';
-                itemElement.innerHTML = `
+        cartItems.forEach((item) => {
+          if (item.selected) {
+            subtotal += item.price * item.quantity;
+            selectedCount++;
+          }
+          const itemElement = document.createElement("div");
+          itemElement.className = "cart-item d-flex align-items-center";
+          itemElement.innerHTML = `
                     <div class="cart-item-select me-3">
-                        <input type="checkbox" class="item-checkbox" data-id="${item.id}" ${item.selected ? 'checked' : ''} onchange="toggleItem(${item.id})">
+                        <input type="checkbox" class="item-checkbox" data-id="${
+                          item.id
+                        }" ${
+            item.selected ? "checked" : ""
+          } onchange="toggleItem(${item.id})">
                     </div>
                     <div class="cart-item-image me-3">
-                        <img src="${item.image}" class="img-fluid product-img" alt="${item.name}">
+                        <img src="${
+                          item.image
+                        }" class="img-fluid product-img" alt="${item.name}">
                     </div>
                     <div class="cart-item-details flex-grow-1">
                         <h5 class="mb-1">${item.name}</h5>
-                        <small class="text-muted">Đơn giá: ${formatPrice(item.price)}</small>
+                        <small class="text-muted">Đơn giá: ${formatPrice(
+                          item.price
+                        )}</small>
                     </div>
                     <div class="cart-item-options me-3">
-                        <select class="form-select size-select" onchange="updateSize(${item.id}, this.value)">
-                            ${item.availableSizes.map(size => 
-                                `<option value="${size}" ${size === item.size ? 'selected' : ''}>${size}</option>`
-                            ).join('')}
+                        <select class="form-select size-select" onchange="updateSize(${
+                          item.id
+                        }, this.value)">
+                            ${item.availableSizes
+                              .map(
+                                (size) =>
+                                  `<option value="${size}" ${
+                                    size === item.size ? "selected" : ""
+                                  }>${size}</option>`
+                              )
+                              .join("")}
                         </select>
                     </div>
                     <div class="cart-item-options me-3">
                         <div class="color-container">
-                            <select class="form-select color-select" onchange="updateColor(${item.id}, this.value)">
-                                ${item.availableColors.map(color => 
-                                    `<option value="${color.name}" ${color.name === item.color ? 'selected' : ''}>${color.name}</option>`
-                                ).join('')}
+                            <select class="form-select color-select" onchange="updateColor(${
+                              item.id
+                            }, this.value)">
+                                ${item.availableColors
+                                  .map(
+                                    (color) =>
+                                      `<option value="${color.name}" ${
+                                        color.name === item.color
+                                          ? "selected"
+                                          : ""
+                                      }>${color.name}</option>`
+                                  )
+                                  .join("")}
                             </select>
-                            <span class="color-box" style="background-color: ${item.availableColors.find(c => c.name === item.color).code}"></span>
+                            <span class="color-box" style="background-color: ${
+                              item.availableColors.find(
+                                (c) => c.name === item.color
+                              ).code
+                            }"></span>
                         </div>
                     </div>
                     <div class="cart-item-quantity me-3">
                         <div class="quantity-controls">
-                            <button class="btn btn-outline-primary" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <button class="btn btn-outline-primary" onclick="updateQuantity(${
+                              item.id
+                            }, -1)">-</button>
                             <span class="px-2">${item.quantity}</span>
-                            <button class="btn btn-outline-primary" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="btn btn-outline-primary" onclick="updateQuantity(${
+                              item.id
+                            }, 1)">+</button>
                         </div>
                     </div>
                     <div class="cart-item-total me-3">
-                        <span class="fw-bold">${formatPrice(item.price * item.quantity)}</span>
+                        <span class="fw-bold">${formatPrice(
+                          item.price * item.quantity
+                        )}</span>
                     </div>
                     <div class="cart-item-action">
-                        <button class="btn btn-danger btn-sm" onclick="removeItem(${item.id})">Xóa</button>
+                        <button class="btn btn-danger btn-sm" onclick="removeItem(${
+                          item.id
+                        })">Xóa</button>
                     </div>
                 `;
-                cartContainer.appendChild(itemElement);
-            });
-
-            document.getElementById('subtotal').textContent = formatPrice(subtotal);
-            document.getElementById('shipping').textContent = formatPrice(30000);
-            document.getElementById('total').textContent = formatPrice(subtotal + 30000);
-            document.getElementById('cartCount').textContent = selectedCount;
-
-            // Cập nhật trạng thái checkbox "Chọn tất cả"
-            const selectAllCheckbox = document.getElementById('select-all');
-            selectAllCheckbox.checked = cartItems.every(item => item.selected);
-        }
-
-        function toggleItem(itemId) {
-            const item = cartItems.find(item => item.id === itemId);
-            if (item) {
-                item.selected = !item.selected;
-                updateCart();
-            }
-        }
-
-        function toggleSelectAll() {
-            const selectAllCheckbox = document.getElementById('select-all');
-            cartItems.forEach(item => item.selected = selectAllCheckbox.checked);
-            updateCart();
-        }
-
-        function updateQuantity(itemId, change) {
-            const item = cartItems.find(item => item.id === itemId);
-            if (item && (item.quantity + change) > 0 && (item.quantity + change) <= 10) {
-                item.quantity += change;
-                updateCart();
-            }
-        }
-
-        function updateSize(itemId, newSize) {
-            const item = cartItems.find(item => item.id === itemId);
-            if (item) {
-                item.size = newSize;
-                updateCart();
-            }
-        }
-
-        function updateColor(itemId, newColor) {
-            const item = cartItems.find(item => item.id === itemId);
-            if (item) {
-                item.color = newColor;
-                updateCart();
-            }
-        }
-
-        function removeItem(itemId) {
-            const index = cartItems.findIndex(item => item.id === itemId);
-            if (index !== -1) {
-                cartItems.splice(index, 1);
-                updateCart();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            updateCart();
-
-            document.getElementById("profileIcon").addEventListener("click", function() {
-                window.location.href = "/src/main/webapp/pages/profile.html";
-            });
-            document.getElementById("cartIcon").addEventListener("click", function() {
-                window.location.href = "/src/main/webapp/pages/cart.html";
-            });
+          cartContainer.appendChild(itemElement);
         });
+
+        document.getElementById("subtotal").textContent = formatPrice(subtotal);
+        document.getElementById("shipping").textContent = formatPrice(30000);
+        document.getElementById("total").textContent = formatPrice(
+          subtotal + 30000
+        );
+        document.getElementById("cartCount").textContent = selectedCount;
+
+        // Cập nhật trạng thái checkbox "Chọn tất cả"
+        const selectAllCheckbox = document.getElementById("select-all");
+        selectAllCheckbox.checked = cartItems.every((item) => item.selected);
+      }
+
+      function toggleItem(itemId) {
+        const item = cartItems.find((item) => item.id === itemId);
+        if (item) {
+          item.selected = !item.selected;
+          updateCart();
+        }
+      }
+
+      function toggleSelectAll() {
+        const selectAllCheckbox = document.getElementById("select-all");
+        cartItems.forEach(
+          (item) => (item.selected = selectAllCheckbox.checked)
+        );
+        updateCart();
+      }
+
+      function updateQuantity(itemId, change) {
+        const item = cartItems.find((item) => item.id === itemId);
+        if (
+          item &&
+          item.quantity + change > 0 &&
+          item.quantity + change <= 10
+        ) {
+          item.quantity += change;
+          updateCart();
+        }
+      }
+
+      function updateSize(itemId, newSize) {
+        const item = cartItems.find((item) => item.id === itemId);
+        if (item) {
+          item.size = newSize;
+          updateCart();
+        }
+      }
+
+      function updateColor(itemId, newColor) {
+        const item = cartItems.find((item) => item.id === itemId);
+        if (item) {
+          item.color = newColor;
+          updateCart();
+        }
+      }
+
+      function removeItem(itemId) {
+        const index = cartItems.findIndex((item) => item.id === itemId);
+        if (index !== -1) {
+          cartItems.splice(index, 1);
+          updateCart();
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        updateCart();
+
+        document
+          .getElementById("profileIcon")
+          .addEventListener("click", function () {
+            window.location.href = "/src/main/webapp/pages/profile.html";
+          });
+        document
+          .getElementById("cartIcon")
+          .addEventListener("click", function () {
+            window.location.href = "/src/main/webapp/pages/cart.html";
+          });
+      });
     </script>
-</body>
+    <script>
+      function loadComponent(id, file, callback) {
+        fetch(file)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(id).innerHTML = data;
+            if (callback) callback(); // Gọi callback sau khi tải xong
+          })
+          .catch((error) => console.error("Lỗi khi tải component:", error));
+      }
+
+      // Tải header xong thì mới gọi loadCategories() và loadFeaturedProducts()
+      loadComponent(
+        "header",
+        "/src/main/webapp/components/header.html",
+        function () {
+          setupLogin(); // Gọi hàm thiết lập đăng nhập sau khi header được tải
+          loadCategories();
+          loadFeaturedProducts();
+        }
+      );
+
+      // Tải footer bình thường
+      loadComponent("footer", "/src/main/webapp/components/footer.html");
+
+      function setupLogin() {
+        const loginForm = document.getElementById("loginForm");
+        const profileIcon = document.getElementById("profileIcon");
+        const cartIcon = document.getElementById("cartIcon");
+        const loginBtn = document.querySelector(".btn-outline-primary");
+        const registerBtn = document.querySelector(".btn-primary");
+
+        let isLoggedIn = false;
+
+        if (loginForm) {
+          loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            isLoggedIn = true;
+            loginBtn.classList.add("d-none");
+            registerBtn.classList.add("d-none");
+            profileIcon.classList.remove("d-none");
+            cartIcon.classList.remove("d-none");
+
+            bootstrap.Modal.getInstance(
+              document.getElementById("loginModal")
+            ).hide();
+            alert("Đăng nhập thành công! (Chức năng giả lập)");
+          });
+        }
+
+        if (profileIcon) {
+          profileIcon.addEventListener("click", function () {
+            if (isLoggedIn) {
+              window.location.href = "/src/main/webapp/pages/profile.html";
+            }
+          });
+        }
+
+        if (cartIcon) {
+          cartIcon.addEventListener("click", function () {
+            if (isLoggedIn) {
+              window.location.href = "/src/main/webapp/pages/cart.html";
+            }
+          });
+        }
+
+        const registerForm = document.getElementById("registerForm");
+        if (registerForm) {
+          registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert(
+              "Đăng ký thành công! Vui lòng đăng nhập. (Chức năng giả lập)"
+            );
+            bootstrap.Modal.getInstance(
+              document.getElementById("registerModal")
+            ).hide();
+          });
+        }
+      }
+    </script>
+  </body>
 </html>
