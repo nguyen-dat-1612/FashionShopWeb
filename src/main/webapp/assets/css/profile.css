@@ -173,3 +173,11 @@ body {
 .save-btn:hover {
     background-color: #b88a5d;
 }
+a {
+    text-decoration: none; /* Xóa gạch dưới */
+    color: inherit; /* Giữ nguyên màu chữ */
+}
+
+a:hover {
+    text-decoration: none; /* Đảm bảo không bị gạch dưới khi hover */
+}

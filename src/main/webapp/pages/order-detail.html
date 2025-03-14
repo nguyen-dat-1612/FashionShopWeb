@@ -75,10 +75,25 @@
         #cancel-order-section {
             display: inline-block;
         }
+    
     </style>
 </head>
 <body>
-    <div id="header"></div>
+    <div class="container">
+        <!-- Sidebar Menu (giữ nguyên từ orders.html) -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>FASHION <span>STYLE</span></h2>
+            </div>
+            <ul>
+                <li id="profile">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword">MẬT KHẨU</li>
+                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
+                <li class="active">DANH SÁCH ĐƠN HÀNG</li>
+                <li id="verification">XÁC MINH TÀI KHOẢN</li>
+                <li id="logout">ĐĂNG XUẤT</li>
+            </ul>
+        </div>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -108,7 +123,7 @@
             </div>
         </div>
     </div>
-<div id="footer"></div>
+
     <script>
         // Dữ liệu giả lập (thêm kích thước và màu sắc)
         const orders = [
@@ -214,86 +229,6 @@
                 window.location.href = sidebarLinks[id];
             });
         });
-    </script>
-    <script>
-      function loadComponent(id, file, callback) {
-        fetch(file)
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById(id).innerHTML = data;
-            if (callback) callback(); // Gọi callback sau khi tải xong
-          })
-          .catch((error) => console.error("Lỗi khi tải component:", error));
-      }
-
-      // Tải header xong thì mới gọi loadCategories() và loadFeaturedProducts()
-      loadComponent(
-        "header",
-        "/src/main/webapp/components/header.html",
-        function () {
-          setupLogin(); // Gọi hàm thiết lập đăng nhập sau khi header được tải
-          loadCategories();
-          loadFeaturedProducts();
-        }
-      );
-
-      // Tải footer bình thường
-      loadComponent("footer", "/src/main/webapp/components/footer.html");
-
-      function setupLogin() {
-        const loginForm = document.getElementById("loginForm");
-        const profileIcon = document.getElementById("profileIcon");
-        const cartIcon = document.getElementById("cartIcon");
-        const loginBtn = document.querySelector(".btn-outline-primary");
-        const registerBtn = document.querySelector(".btn-primary");
-
-        let isLoggedIn = false;
-
-        if (loginForm) {
-          loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            isLoggedIn = true;
-            loginBtn.classList.add("d-none");
-            registerBtn.classList.add("d-none");
-            profileIcon.classList.remove("d-none");
-            cartIcon.classList.remove("d-none");
-
-            bootstrap.Modal.getInstance(
-              document.getElementById("loginModal")
-            ).hide();
-            alert("Đăng nhập thành công! (Chức năng giả lập)");
-          });
-        }
-
-        if (profileIcon) {
-          profileIcon.addEventListener("click", function () {
-            if (isLoggedIn) {
-              window.location.href = "/src/main/webapp/pages/profile.html";
-            }
-          });
-        }
-
-        if (cartIcon) {
-          cartIcon.addEventListener("click", function () {
-            if (isLoggedIn) {
-              window.location.href = "/src/main/webapp/pages/cart.html";
-            }
-          });
-        }
-
-        const registerForm = document.getElementById("registerForm");
-        if (registerForm) {
-          registerForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert(
-              "Đăng ký thành công! Vui lòng đăng nhập. (Chức năng giả lập)"
-            );
-            bootstrap.Modal.getInstance(
-              document.getElementById("registerModal")
-            ).hide();
-          });
-        }
-      }
     </script>
 </body>
 </html>

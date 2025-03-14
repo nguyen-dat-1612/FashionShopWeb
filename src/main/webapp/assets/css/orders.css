@@ -119,6 +119,7 @@ body {
 .status.cancelled { background-color: #dc3545; }
 
 .detail-btn {
+    text-decoration: none;
     background-color: #d4a373;
     color: #fff;
     border: none;
