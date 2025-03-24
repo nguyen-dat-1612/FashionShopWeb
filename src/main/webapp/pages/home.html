@@ -1,384 +1,63 @@
-<!DOCTYPE html>
+
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fashion Style - Trang Chủ</title>
-    <link rel="stylesheet" href="/src/main/webapp/assets/css/home.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
     <div id="header"></div>
-    <!-- Header sẽ được load vào đây -->
 
     <!-- Main Content -->
     <main class="container mt-4">
-      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8"
-              class="d-block w-100"
-              alt="Fashion Collection"
-            />
-            <div class="carousel-caption">
-              <h2>Summer Collection 2024</h2>
-              <p>Khám phá xu hướng thời trang mới nhất</p>
+        
+        <!-- Hero Carousel -->
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8" class="d-block w-100" alt="Fashion Collection">
+                    <div class="carousel-caption">
+                        <h2>Summer Collection 2024</h2>
+                        <p>Khám phá xu hướng thời trang mới nhất</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b" class="d-block w-100" alt="New Arrivals">
+                    <div class="carousel-caption">
+                        <h2>Hàng Mới Về</h2>
+                        <p>Mua sắm phong cách mới nhất</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="carousel-item">
-            <img
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b"
-              class="d-block w-100"
-              alt="New Arrivals"
-            />
-            <div class="carousel-caption">
-              <h2>Hàng Mới Về</h2>
-              <p>Mua sắm phong cách mới nhất</p>
-            </div>
-          </div>
         </div>
-      </div>
 
-      <section class="categories mt-5">
-        <h2 class="section-title">Danh Mục Sản Phẩm</h2>
-        <div class="category-list" id="category-list"></div>
-      </section>
+        <!-- Danh Mục Sản Phẩm -->
+        <section class="categories mt-5">
+            <h2 class="section-title">Danh Mục Sản Phẩm</h2>
+            <div class="category-list" id="category-list"></div>
+        </section>
 
-      <section class="featured-products mt-5">
-        <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
-        <div class="products-list" id="products-list"></div>
-      </section>
+        <!-- Sản Phẩm Nổi Bật -->
+        <section class="featured-products mt-5">
+            <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+            <div class="products-list" id="products-list"></div>
+        </section>
+
     </main>
 
+    <!-- Footer -->
     <div id="footer"></div>
-    <!-- Header sẽ được load vào đây -->
 
-    <!-- Modal Login -->
-    <div
-      class="modal fade"
-      id="loginModal"
-      tabindex="-1"
-      aria-labelledby="loginModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">
-              Đăng Nhập Fashion Style
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="loginForm">
-              <div class="mb-3">
-                <label for="loginEmail" class="form-label">Địa chỉ Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="loginEmail"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="loginPassword" class="form-label">Mật khẩu</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="loginPassword"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary w-100">
-                Đăng Nhập
-              </button>
-            </form>
-            <div class="text-center mt-3">
-              <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Register -->
-    <div
-      class="modal fade"
-      id="registerModal"
-      tabindex="-1"
-      aria-labelledby="registerModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="registerModalLabel">
-              Đăng Ký Fashion Style
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="registerForm">
-              <div class="mb-3">
-                <label for="registerEmail" class="form-label"
-                  >Địa chỉ Email</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="registerEmail"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="registerPassword" class="form-label"
-                  >Mật khẩu</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="registerPassword"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="confirmPassword" class="form-label"
-                  >Xác nhận mật khẩu</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="confirmPassword"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary w-100">
-                Đăng Ký
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const loginForm = document.getElementById("loginForm");
-        const profileIcon = document.getElementById("profileIcon");
-        const cartIcon = document.getElementById("cartIcon"); // Thêm cartIcon
-        const loginBtn = document.querySelector(".btn-outline-primary");
-        const registerBtn = document.querySelector(".btn-primary");
+    <script src="/src/main/webapp/assets/js/home.js"></script>
 
-        // Giả lập trạng thái đăng nhập
-        let isLoggedIn = false;
-
-        loginForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          // Giả lập đăng nhập thành công
-          isLoggedIn = true;
-          loginBtn.classList.add("d-none");
-          registerBtn.classList.add("d-none");
-          profileIcon.classList.remove("d-none");
-          cartIcon.classList.remove("d-none"); // Hiển thị giỏ hàng sau khi đăng nhập
-          bootstrap.Modal.getInstance(
-            document.getElementById("loginModal")
-          ).hide();
-          alert("Đăng nhập thành công! (Chức năng giả lập)");
-        });
-
-        profileIcon.addEventListener("click", function () {
-          if (isLoggedIn) {
-            window.location.href = "/src/main/webapp/pages/profile.html";
-          }
-        });
-
-        cartIcon.addEventListener("click", function () {
-          if (isLoggedIn) {
-            window.location.href = "/src/main/webapp/pages/cart.html"; // Chuyển hướng đến trang giỏ hàng
-          }
-        });
-
-        document
-          .getElementById("registerForm")
-          .addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert(
-              "Đăng ký thành công! Vui lòng đăng nhập. (Chức năng giả lập)"
-            );
-            bootstrap.Modal.getInstance(
-              document.getElementById("registerModal")
-            ).hide();
-          });
-
-        // Load danh mục và sản phẩm
-        loadCategories();
-        loadFeaturedProducts();
-      });
-
-      // Dữ liệu giả lập cho danh mục sản phẩm
-      const categories = [
-        {
-          name: "Quần",
-          image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
-        },
-        {
-          name: "Áo",
-          image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
-        },
-        {
-          name: "Phụ Kiện",
-          image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
-        },
-        {
-          name: "Giày",
-          image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
-        },
-      ];
-
-      // Dữ liệu giả lập cho sản phẩm nổi bật
-      const featuredProducts = [
-        {
-          name: "Áo Thun Trắng",
-          price: "250.000 VNĐ",
-          image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-        },
-        {
-          name: "Quần Jeans Xanh",
-          price: "450.000 VNĐ",
-          image: "https://images.unsplash.com/photo-1542272604-787c3835535d",
-        },
-        {
-          name: "Giày Sneaker Đen",
-          price: "800.000 VNĐ",
-          image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3",
-        },
-        {
-          name: "Mũ Lưỡi Trai",
-          price: "150.000 VNĐ",
-          image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3",
-        },
-      ];
-
-      // Hiển thị danh mục sản phẩm
-      function loadCategories() {
-        const categoryList = document.getElementById("category-list");
-        categories.forEach((category) => {
-          const categoryCard = `
-                    <div class="category-card">
-                        <img src="${category.image}" alt="${category.name}">
-                        <h3>${category.name}</h3>
-                    </div>
-                `;
-          categoryList.innerHTML += categoryCard;
-        });
-      }
-
-      // Hiển thị sản phẩm nổi bật
-      function loadFeaturedProducts() {
-        const productList = document.getElementById("products-list");
-        featuredProducts.forEach((product, index) => {
-          const productCard = `
-                    <div class="product-card" onclick="window.location.href='/src/main/webapp/pages/product-detail.html?id=${
-                      index + 1
-                    }'">
-                        <img src="${product.image}" alt="${product.name}">
-                        <h5>${product.name}</h5>
-                        <p>${product.price}</p>
-                    </div>
-                `;
-          productList.innerHTML += productCard;
-        });
-      }
-    </script>
-    <script>
-      function loadComponent(id, file, callback) {
-        fetch(file)
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById(id).innerHTML = data;
-            if (callback) callback(); // Gọi callback sau khi tải xong
-          })
-          .catch((error) => console.error("Lỗi khi tải component:", error));
-      }
-
-      // Tải header xong thì mới gọi loadCategories() và loadFeaturedProducts()
-      loadComponent("header", "/src/main/webapp/components/header.html", function () {
-    setupLogin(); // Gọi hàm thiết lập đăng nhập sau khi header được tải
-    loadCategories();
-    loadFeaturedProducts();
-});
-
-// Tải footer bình thường
-loadComponent("footer", "/src/main/webapp/components/footer.html");
-
-function setupLogin() {
-    const loginForm = document.getElementById("loginForm");
-    const profileIcon = document.getElementById("profileIcon");
-    const cartIcon = document.getElementById("cartIcon");
-    const loginBtn = document.querySelector(".btn-outline-primary");
-    const registerBtn = document.querySelector(".btn-primary");
-
-    let isLoggedIn = false;
-
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            isLoggedIn = true;
-            loginBtn.classList.add("d-none");
-            registerBtn.classList.add("d-none");
-            profileIcon.classList.remove("d-none");
-            cartIcon.classList.remove("d-none");
-
-            bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
-            alert("Đăng nhập thành công! (Chức năng giả lập)");
-        });
-    }
-
-    if (profileIcon) {
-        profileIcon.addEventListener("click", function () {
-            if (isLoggedIn) {
-                window.location.href = "/src/main/webapp/pages/profile.html";
-            }
-        });
-    }
-
-    if (cartIcon) {
-        cartIcon.addEventListener("click", function () {
-            if (isLoggedIn) {
-                window.location.href = "/src/main/webapp/pages/cart.html";
-            }
-        });
-    }
-
-    const registerForm = document.getElementById("registerForm");
-    if (registerForm) {
-        registerForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("Đăng ký thành công! Vui lòng đăng nhập. (Chức năng giả lập)");
-            bootstrap.Modal.getInstance(document.getElementById("registerModal")).hide();
-        });
-    }
-}
-
-    </script>
-  </body>
+</body>
 </html>
