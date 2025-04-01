@@ -85,3 +85,36 @@ window.onload = async () => {
         displayOrders(filteredOrders);
     });
 };
+
+
+// Hàm đăng xuất toàn diện
+async function logout() {
+    try {
+        const token = localStorage.getItem("token");
+        
+        // Gọi API logout backend (nếu có)
+        if (token) {
+            await fetch('http://localhost:8080/api/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+        }
+
+        // Xóa toàn bộ dữ liệu người dùng
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("userAccount");
+        
+        // Chuyển hướng về trang chủ
+        window.location.href = "/src/main/webapp/pages/home.html";
+        
+    } catch (error) {
+        console.error("Lỗi khi đăng xuất:", error);
+        // Vẫn xóa dữ liệu dù API có lỗi
+        localStorage.clear();
+        window.location.href = "/src/main/webapp/pages/home.html";
+    }
+}

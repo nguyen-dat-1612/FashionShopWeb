@@ -1,0 +1,23 @@
+/* File: /src/main/webapp/assets/css/sidebar.css */
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 15px 10px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li.active {
+    background-color: #d4a373;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.sidebar ul li:hover {
+    color: #d4a373;
+}

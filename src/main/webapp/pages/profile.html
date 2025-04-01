@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông Tin Cá Nhân - Fashion Store</title>
     <link rel="stylesheet" href="/src/main/webapp/assets/css/profile.css">
+    <!-- Load sidebar.css -->
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -19,10 +21,8 @@
             <ul>
                 <li class="active" href="/src/main/webapp/pages/profile.html">THÔNG TIN CÁ NHÂN</li>
                 <li id="changePassword" href="/src/main/webapp/pages/change-password.html">MẬT KHẨU</li>
-                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
                 <li id="orders" href="/src/main/webapp/pages/orders.html">DANH SÁCH ĐƠN HÀNG</li>
-                <li id="verification">XÁC MINH TÀI KHOẢN</li>
-                <li id="logout" href = "/src/main/webapp/pages/home.html";>ĐĂNG XUẤT</li>
+                <li id="logout">ĐĂNG XUẤT</li>
             </ul>
         </div>
 
@@ -36,47 +36,35 @@
                 </div>
                 <div class="profile-info">
                     <div class="info-row">
-                        <label>Mã khách hàng</label>
-                        <span id="customer-id">KH23010122277</span>
+                        <label>ID</label>
+                        <span id="user-id"></span>
                     </div>
                     <div class="info-row">
                         <label>Họ và tên</label>
-                        <input type="text" id="full-name" readonly>
-                    </div>
-                    <div class="info-row">
-                        <label>Tên hiển thị</label>
-                        <input type="text" id="display-name" readonly>
+                        <input type="text" id="fullname" readonly>
                     </div>
                     <div class="info-row">
                         <label>Giới tính</label>
                         <select id="gender" disabled>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
+                            <option value="true">Nam</option>
+                            <option value="false">Nữ</option>
                         </select>
                     </div>
                     <div class="info-row">
                         <label>Số điện thoại</label>
                         <input type="text" id="phone" readonly>
-                        <span class="status not-verified">Xác minh ngay</span>
                     </div>
                     <div class="info-row">
                         <label>Email</label>
                         <input type="email" id="email" readonly>
-                        <span class="status verified">Đã xác minh</span>
                     </div>
                     <div class="info-row">
-                        <label>Chiều cao</label>
-                        <input type="range" id="height" min="100" max="200" readonly>
-                        <span id="height-value">155cm</span>
+                        <label>Địa chỉ</label>
+                        <input type="text" id="address" readonly>
                     </div>
                     <div class="info-row">
-                        <label>Cân nặng</label>
-                        <input type="range" id="weight" min="30" max="100" readonly>
-                        <span id="weight-value">50kg</span>
-                    </div>
-                    <div class="info-row">
-                        <label>Địa chỉ giao hàng</label>
-                        <input type="text" id="delivery-info" readonly>
+                        <label>Ngày sinh</label>
+                        <input type="text" id="birthday" readonly>
                     </div>
                     <button class="save-btn">Lưu thay đổi</button>
                 </div>
@@ -84,51 +72,20 @@
         </div>
     </div>
 
-    <!-- <script src="/src/main/webapp/assets/js/profile.js"></script> -->
-
+    <script src="/src/main/webapp/assets/js/profile.js"></script>
+    
     <script>
-        // Hàm cập nhật giao diện sau đăng xuất
-        function updateLoginUI(isLoggedIn, loginBtn, registerBtn, profileIcon, cartIcon) {
-            if (loginBtn) loginBtn.style.display = isLoggedIn ? 'none' : 'block';
-            if (registerBtn) registerBtn.style.display = isLoggedIn ? 'none' : 'block';
-            if (profileIcon) profileIcon.style.display = isLoggedIn ? 'block' : 'none';
-            if (cartIcon) cartIcon.style.display = isLoggedIn ? 'block' : 'none';
-        }
-    
-        // Hàm đăng xuất toàn diện
-        async function logout() {
-            try {
-                const token = localStorage.getItem("token");
-                
-                // Gọi API logout backend (nếu có)
-                if (token) {
-                    await fetch('http://localhost:8080/api/auth/logout', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                }
-    
-                // Xóa toàn bộ dữ liệu người dùng
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("user");
-                localStorage.removeItem("userAccount");
-                
-                // Chuyển hướng về trang chủ
-                window.location.href = "/src/main/webapp/pages/home.html";
-                
-            } catch (error) {
-                console.error("Lỗi khi đăng xuất:", error);
-                // Vẫn xóa dữ liệu dù API có lỗi
-                localStorage.clear();
-                window.location.href = "/src/main/webapp/pages/home.html";
+        // Xử lý chuyển trang khi click vào các mục sidebar
+        document.querySelectorAll('.sidebar li').forEach(item => {
+            const href = item.getAttribute('href');
+            if (href) {
+                item.style.cursor = 'pointer'; // Hiển thị cursor pointer
+                item.addEventListener('click', () => {
+                    window.location.href = href;
+                });
             }
-        }
-    
-        // Gắn sự kiện cho nút đăng xuất
-        document.getElementById("logout").addEventListener("click", logout);
-    </script>
+        });
+        
+        </script>
 </body>
 </html>

@@ -20,26 +20,26 @@
                 <div class="shipping-info">
                     <h3 class="section-title">Thông tin giao hàng</h3>
                     <form id="checkoutForm">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="fullName">Họ và tên *</label>
                             <input type="text" id="fullName" required>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="phone">Số điện thoại *</label>
                             <input type="tel" id="phone" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="email">Email (tùy chọn)</label>
                             <input type="email" id="email">
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="address">Địa chỉ giao hàng *</label>
                             <textarea id="address" rows="3" required></textarea>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="notes">Ghi chú đơn hàng (tùy chọn)</label>
                             <textarea id="notes" rows="2"></textarea>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
 
@@ -47,16 +47,20 @@
                 <div class="payment-method">
                     <h3 class="section-title">Phương thức thanh toán</h3>
                     <div class="payment-option">
-                        <input type="radio" id="cod" name="payment" value="cod" checked>
+                        <input type="radio" id="cod" name="payment" value="COD" checked>
                         <label for="cod">Thanh toán khi nhận hàng (COD)</label>
                     </div>
                     <div class="payment-option">
-                        <input type="radio" id="bank" name="payment" value="bank">
-                        <label for="bank">Chuyển khoản ngân hàng</label>
+                        <input type="radio" id="vnpay" name="payment" value="VNPAY">
+                        <label for="vnpay">Chuyển khoản qua VNPAY</label>
                     </div>
                     <div class="payment-option">
-                        <input type="radio" id="wallet" name="payment" value="wallet">
-                        <label for="wallet">Ví điện tử (Momo, ZaloPay)</label>
+                        <input type="radio" id="momo" name="payment" value="MOMO">
+                        <label for="momo">Ví điện tử (Momo, ZaloPay)</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="credit_card" name="payment" value="CREDIT_CARD">
+                        <label for="credit_card">Thanh toán qua thẻ tín dụng</label>
                     </div>
                 </div>
             </div>

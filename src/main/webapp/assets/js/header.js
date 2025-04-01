@@ -46,57 +46,175 @@ function setupLogin() {
         registerForm.addEventListener("submit", handleRegisterSubmit);
     }
 }
-
 // Xử lý submit form đăng nhập
 async function handleLoginSubmit(e) {
     e.preventDefault();
-    console.log("Form đăng nhập được submit");
+    console.log("%c Form đăng nhập được submit", "background: #ddd; color: #333; padding: 2px; border-radius: 2px;");
 
-    const username = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    console.log("Thông tin đăng nhập:", { username, password });
+    // Kiểm tra và log DOM elements
+    const loginEmailElement = document.getElementById("loginEmail");
+    const loginPasswordElement = document.getElementById("loginPassword");
+    
+    if (!loginEmailElement) {
+        console.error("Không tìm thấy element loginEmail");
+        showToast("Lỗi: Không tìm thấy trường email", "error");
+        return;
+    }
+    
+    if (!loginPasswordElement) {
+        console.error("Không tìm thấy element loginPassword");
+        showToast("Lỗi: Không tìm thấy trường mật khẩu", "error");
+        return;
+    }
+
+    const username = loginEmailElement.value;
+    const password = loginPasswordElement.value;
+    
+    // Kiểm tra dữ liệu đầu vào
+    if (!username) {
+        console.warn("Email/username trống");
+        showToast("Vui lòng nhập email/username", "warning");
+        return;
+    }
+    
+    if (!password) {
+        console.warn("Mật khẩu trống");
+        showToast("Vui lòng nhập mật khẩu", "warning");
+        return;
+    }
+    
+    console.log("Thông tin đăng nhập:", { 
+        username, 
+        password: password ? "***" : "trống",
+        usernameLength: username.length,
+        passwordLength: password.length
+    });
 
     try {
+        console.time("API request time");
+        console.log("Đang gửi request đến:", "http://localhost:8080/api/auth/login");
+        console.log("Dữ liệu gửi đi:", JSON.stringify({ username, password: "***" }));
+        
         const response = await fetch("http://localhost:8080/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password }),
+            credentials: "include" // Thêm để xử lý cookie nếu cần
         });
         
+        console.timeEnd("API request time");
+        console.log("Response status:", response.status);
+        console.log("Response headers:", Object.fromEntries([...response.headers]));
+        
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            console.error(`HTTP error! Status: ${response.status}, Text: ${response.statusText}`);
+            
+            // Cố gắng đọc lỗi từ response body nếu có
+            try {
+                const errorBody = await response.text();
+                console.error("Response body:", errorBody);
+                
+                try {
+                    const errorJson = JSON.parse(errorBody);
+                    console.error("Phân tích lỗi từ JSON:", errorJson);
+                    throw new Error(`Lỗi từ server: ${errorJson.message || JSON.stringify(errorJson)}`);
+                } catch (jsonError) {
+                    throw new Error(`HTTP error! Status: ${response.status}, Body: ${errorBody}`);
+                }
+            } catch (bodyError) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
         }
         
-        const result = await response.json();
-        console.log("Kết quả đăng nhập từ API:", result);
-
-        if (result.code === 200) {
-            console.log("Đăng nhập thành công, lưu thông tin vào localStorage");
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("token", result.data);
+        let result;
+        try {
+            const rawText = await response.text();
+            console.log("Raw response text:", rawText);
             
             try {
+                result = JSON.parse(rawText);
+                console.log("Kết quả đăng nhập từ API:", result);
+            } catch (jsonError) {
+                console.error("Lỗi khi parse JSON:", jsonError);
+                console.error("Text nhận được:", rawText);
+                throw new Error("Server trả về dữ liệu không phải JSON hợp lệ");
+            }
+        } catch (textError) {
+            console.error("Lỗi khi đọc response text:", textError);
+            throw new Error("Không thể đọc dữ liệu phản hồi từ server");
+        }
+
+        if (result.code === 200) {
+            console.log("%c Đăng nhập thành công! ", "background: #4CAF50; color: white; padding: 2px; border-radius: 2px;");
+            console.log("Token nhận được:", result.data ? `${result.data.substring(0, 10)}...` : "không có");
+            
+            if (!result.data) {
+                console.warn("Token trống hoặc không tồn tại trong kết quả");
+                showToast("Đăng nhập thành công nhưng không nhận được token", "warning");
+                return;
+            }
+            
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("token", result.data);
+            console.log("Đã lưu token vào localStorage");
+            
+            try {
+                console.time("Fetch user info time");
+                console.log("Đang lấy thông tin người dùng với token");
                 const userData = await fetchUserInfo(result.data);
+                console.timeEnd("Fetch user info time");
+                
+                console.log("Dữ liệu người dùng nhận được:", userData);
+                
                 if (userData) {
+                    console.log("Cập nhật UI đăng nhập");
                     updateLoginUI(true);
-                    const modal = bootstrap.Modal.getInstance(document.getElementById("loginModal"));
-                    modal.hide();
+                    
+                    const modalElement = document.getElementById("loginModal");
+                    if (!modalElement) {
+                        console.error("Không tìm thấy element loginModal");
+                    } else {
+                        const modal = bootstrap.Modal.getInstance(modalElement);
+                        if (!modal) {
+                            console.error("Không thể lấy instance của Bootstrap Modal");
+                            console.log("Thử đóng modal bằng jQuery nếu có");
+                            try {
+                                if (typeof $ !== 'undefined') {
+                                    $("#loginModal").modal("hide");
+                                    console.log("Đã đóng modal bằng jQuery");
+                                }
+                            } catch (jqueryError) {
+                                console.error("Lỗi khi dùng jQuery:", jqueryError);
+                            }
+                        } else {
+                            modal.hide();
+                            console.log("Đã đóng modal đăng nhập");
+                        }
+                    }
+                    
                     showToast("Đăng nhập thành công!", "success");
+                } else {
+                    console.warn("userData trống hoặc undefined");
+                    showToast("Đăng nhập thành công nhưng dữ liệu người dùng trống", "warning");
                 }
             } catch (error) {
                 console.error("Lỗi khi lấy thông tin user:", error);
+                console.error("Stack trace:", error.stack);
                 showToast("Đăng nhập thành công nhưng không lấy được thông tin người dùng", "warning");
             }
         } else {
-            console.log("Đăng nhập thất bại:", result.message);
-            showToast(`Đăng nhập thất bại: ${result.message}`, "error");
+            console.warn("Đăng nhập thất bại:", result);
+            console.log("Mã lỗi:", result.code);
+            console.log("Thông báo lỗi:", result.message);
+            showToast(`Đăng nhập thất bại: ${result.message || "Không có thông báo lỗi"}`, "error");
         }
     } catch (error) {
-        console.error("Lỗi khi đăng nhập:", error);
-        showToast("Có lỗi xảy ra, vui lòng thử lại!", "error");
+        console.error("%c ❌ Lỗi khi đăng nhập: ", "background: #f44336; color: white; padding: 2px; border-radius: 2px;", error);
+        console.error("Chi tiết lỗi:", error.message);
+        console.error("Stack trace:", error.stack);
+        showToast(`Có lỗi xảy ra: ${error.message}`, "error");
     }
 }
-
 // Xử lý click vào profile
 function handleProfileClick() {
     console.log("Click vào profile icon");

@@ -126,3 +126,37 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+
+/* --- Danh mục sản phẩm --- */
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.category-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0; /* Viền nhẹ */
+    border-radius: 8px;
+    padding: 15px 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi hover */
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-color: #d4a373; /* Màu chủ đạo của bạn */
+}
+
+/* Kiểu chữ */
+.category-card h3 {
+    margin: 0;
+    color: #333333; /* Màu chữ xám đậm */
+    font-size: 15px;
+    font-weight: 500;
+    text-shadow: none; /* Bỏ text-shadow nếu có */
+}
