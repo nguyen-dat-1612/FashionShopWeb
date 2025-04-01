@@ -22,7 +22,7 @@
                 <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
                 <li id="orders" href="/src/main/webapp/pages/orders.html">DANH SÁCH ĐƠN HÀNG</li>
                 <li id="verification">XÁC MINH TÀI KHOẢN</li>
-                <li id="logout">ĐĂNG XUẤT</li>
+                <li id="logout" href = "/src/main/webapp/pages/home.html";>ĐĂNG XUẤT</li>
             </ul>
         </div>
 
@@ -84,15 +84,51 @@
         </div>
     </div>
 
-    <script src="/src/main/webapp/assets/js/profile.js"></script>
+    <!-- <script src="/src/main/webapp/assets/js/profile.js"></script> -->
 
     <script>
-        document.getElementById("changePassword").addEventListener("click", function() {
-            window.location.href = "/src/main/webapp/pages/change-password.html";
-        });
-        document.getElementById("orders").addEventListener("click", function() {
-        window.location.href = "/src/main/webapp/pages/orders.html";
-    });
+        // Hàm cập nhật giao diện sau đăng xuất
+        function updateLoginUI(isLoggedIn, loginBtn, registerBtn, profileIcon, cartIcon) {
+            if (loginBtn) loginBtn.style.display = isLoggedIn ? 'none' : 'block';
+            if (registerBtn) registerBtn.style.display = isLoggedIn ? 'none' : 'block';
+            if (profileIcon) profileIcon.style.display = isLoggedIn ? 'block' : 'none';
+            if (cartIcon) cartIcon.style.display = isLoggedIn ? 'block' : 'none';
+        }
+    
+        // Hàm đăng xuất toàn diện
+        async function logout() {
+            try {
+                const token = localStorage.getItem("token");
+                
+                // Gọi API logout backend (nếu có)
+                if (token) {
+                    await fetch('http://localhost:8080/api/auth/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                }
+    
+                // Xóa toàn bộ dữ liệu người dùng
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                localStorage.removeItem("userAccount");
+                
+                // Chuyển hướng về trang chủ
+                window.location.href = "/src/main/webapp/pages/home.html";
+                
+            } catch (error) {
+                console.error("Lỗi khi đăng xuất:", error);
+                // Vẫn xóa dữ liệu dù API có lỗi
+                localStorage.clear();
+                window.location.href = "/src/main/webapp/pages/home.html";
+            }
+        }
+    
+        // Gắn sự kiện cho nút đăng xuất
+        document.getElementById("logout").addEventListener("click", logout);
     </script>
 </body>
 </html>

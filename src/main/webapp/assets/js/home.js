@@ -39,7 +39,10 @@ async function loadFeaturedProducts() {
           featuredProducts.forEach((product) => {
               const productCard = `
                   <div class="product-card" onclick="window.location.href='/src/main/webapp/pages/product-detail.html?id=${product.id}'">
-                      <img src="${product.thumbnail || 'https://via.placeholder.com/150'}" alt="${product.name}">
+                      <img src="${product.thumbnail && product.thumbnail.startsWith('http') ? product.thumbnail : 'https://via.placeholder.com/150'}" 
+                            alt="${product.name || 'Product image'}"
+                            style="width: 150px; height: 150px; object-fit: cover;"
+                            onerror="this.src='https://via.placeholder.com/150?text=Image+Not+Found'">
                       <h5>${product.name}</h5>
                       <p>${parseInt(product.price).toLocaleString()} VNĐ</p>
                       <small>${product.brand ? product.brand.name : "Không rõ thương hiệu"}</small>
