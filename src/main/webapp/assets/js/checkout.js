@@ -1,3 +1,14 @@
+// Load header và chạy header.js sau khi header được chèn
+loadComponent("header", "/src/main/webapp/components/header.html", function () {
+    const script = document.createElement("script");
+    script.src = "/src/main/webapp/assets/js/header.js";
+    script.onload = function () {
+        console.log("header.js đã load xong và chạy setupLogin");
+    };
+    document.body.appendChild(script);
+});
+
+loadComponent("footer", "/src/main/webapp/components/footer.html");
 document.addEventListener("DOMContentLoaded", function() {
 
      // Kiểm tra đăng nhập
@@ -219,14 +230,3 @@ function loadComponent(id, file, callback) {
         .catch((error) => console.error("Lỗi khi tải component:", error));
 }
   
-// Load header và chạy header.js sau khi header được chèn
-loadComponent("header", "/src/main/webapp/components/header.html", function () {
-    const script = document.createElement("script");
-    script.src = "/src/main/webapp/assets/js/header.js";
-    script.onload = function () {
-        console.log("header.js đã load xong và chạy setupLogin");
-    };
-    document.body.appendChild(script);
-});
-
-loadComponent("footer", "/src/main/webapp/components/footer.html");
