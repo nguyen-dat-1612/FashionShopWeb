@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.removeItem('selectedCartItems');
             
             // Hiển thị modal lựa chọn
-            showOrderSuccessModal(result.data.orderId);
+            showOrderSuccessModal(result.data.id);
             
         } catch (error) {
             console.error('Lỗi khi đặt hàng:', error);
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         
         document.getElementById('viewOrderBtn').addEventListener('click', function() {
-            window.location.href = `/src/main/webapp/pages/order-details.html?orderId=${orderId}`;
+            window.location.href = `/src/main/webapp/pages/order-detail.html?id=${orderId}`;
         });
         
         // Xóa modal khi đóng

@@ -1,4 +1,3 @@
-<!-- orders.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -13,48 +12,37 @@
         <!-- Sidebar Menu -->
         <div class="sidebar">
             <div class="logo">
-                <h2>FASHION <span>STYLE</span></h2>
+                <a href="/src/main/webapp/pages/home.html">
+                    <h2>FASHION <span>STYLE</span></h2>
+                </a>
             </div>
             <ul>
                 <li id="profile" href="/src/main/webapp/pages/profile.html">THÔNG TIN CÁ NHÂN</li>
                 <li id="changePassword" href="/src/main/webapp/pages/change-password.html">MẬT KHẨU</li>
                 <li class="active" href="/src/main/webapp/pages/orders.html">DANH SÁCH ĐƠN HÀNG</li>
-                <li id="logout" href = "/src/main/webapp/pages/home.html";>ĐĂNG XUẤT</li>
+                <li id="logout">ĐĂNG XUẤT</li>
             </ul>
         </div>
-
         <!-- Main Content -->
         <div class="main-content">
             <h2>DANH SÁCH ĐƠN HÀNG</h2>
-            <div class="orders-section">
-                <div class="filter-bar">
-                    <select id="order-status-filter">
-                        <option value="all">Tất cả</option>
-                        <option value="pending">Đang xử lý</option>
-                        <option value="shipped">Đang giao</option>
-                        <option value="delivered">Đã giao</option>
-                        <option value="cancelled">Đã hủy</option>
-                    </select>
-                </div>
-                <table class="orders-table">
-                    <thead>
-                        <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Ngày đặt</th>
-                            <th>Tổng tiền</th>
-                            <th>Trạng thái</th>
-                            <th>Chi tiết</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-list"></tbody>
-                </table>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-status="PENDING">Đang chờ</button>
+                <button class="filter-btn" data-status="CONFIRMED">Đã xác nhận</button>
+                <button class="filter-btn" data-status="DELIVERING">Đang giao</button>
+                <button class="filter-btn" data-status="DELIVERED">Đã giao</button>
+                <button class="filter-btn" data-status="CANCELLED">Đã hủy</button>
+            </div>
+            
+            <div class="orders-container" id="orders-list">
+                <!-- Danh sách đơn hàng sẽ được tải ở đây -->
             </div>
         </div>
     </div>
 
     <script src="/src/main/webapp/assets/js/orders.js"></script>
     <script>
-        // Xử lý chuyển trang khi click vào các mục sidebar
         document.querySelectorAll('.sidebar li').forEach(item => {
             const href = item.getAttribute('href');
             if (href) {

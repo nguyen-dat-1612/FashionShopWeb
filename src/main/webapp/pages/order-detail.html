@@ -75,6 +75,7 @@
         #cancel-order-section {
             display: inline-block;
         }
+        
     
     </style>
 </head>
@@ -83,14 +84,14 @@
         <!-- Sidebar Menu (giữ nguyên từ orders.html) -->
         <div class="sidebar">
             <div class="logo">
-                <h2>FASHION <span>STYLE</span></h2>
+                <a href="/src/main/webapp/pages/home.html">
+                    <h2>FASHION <span>STYLE</span></h2>
+                </a>
             </div>
             <ul>
-                <li id="profile">THÔNG TIN CÁ NHÂN</li>
-                <li id="changePassword">MẬT KHẨU</li>
-                <li id="promotions">KHUYẾN MÃI DÀNH CHO BẠN</li>
-                <li class="active">DANH SÁCH ĐƠN HÀNG</li>
-                <li id="verification">XÁC MINH TÀI KHOẢN</li>
+                <li id="profile" href="/src/main/webapp/pages/profile.html">THÔNG TIN CÁ NHÂN</li>
+                <li id="changePassword" href="/src/main/webapp/pages/change-password.html">MẬT KHẨU</li>
+                <li class="active" href="/src/main/webapp/pages/orders.html">DANH SÁCH ĐƠN HÀNG</li>
                 <li id="logout">ĐĂNG XUẤT</li>
             </ul>
         </div>
@@ -124,111 +125,18 @@
         </div>
     </div>
 
+    <script src="/src/main/webapp/assets/js/order-detail.js"></script>
     <script>
-        // Dữ liệu giả lập (thêm kích thước và màu sắc)
-        const orders = [
-            {
-                orderId: "DH001",
-                date: "2025-03-10",
-                total: 450000,
-                status: "pending",
-                items: [
-                    { name: "Áo thun trắng", size: "M", color: "Trắng", quantity: 2, price: 150000 },
-                    { name: "Quần jeans xanh", size: "L", color: "Xanh đậm", quantity: 1, price: 150000 }
-                ]
-            },
-            {
-                orderId: "DH002",
-                date: "2025-03-09",
-                total: 800000,
-                status: "shipped",
-                items: [
-                    { name: "Giày sneaker đen", size: "42", color: "Đen", quantity: 1, price: 800000 }
-                ]
+        document.querySelectorAll('.sidebar li').forEach(item => {
+            const href = item.getAttribute('href');
+            if (href) {
+                item.style.cursor = 'pointer'; // Hiển thị cursor pointer
+                item.addEventListener('click', () => {
+                    window.location.href = href;
+                });
             }
-        ];
-
-        function formatPrice(price) {
-            return price.toLocaleString('vi-VN') + " VNĐ";
-        }
-
-        function getStatusText(status) {
-            const statusMap = {
-                "pending": "Đang xử lý",
-                "shipped": "Đang giao",
-                "delivered": "Đã giao",
-                "cancelled": "Đã hủy"
-            };
-            return statusMap[status] || "Không xác định";
-        }
-
-        function loadOrderDetails() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const orderId = urlParams.get("id");
-            const order = orders.find(o => o.orderId === orderId);
-
-            if (!order) {
-                document.querySelector(".main-content").innerHTML = "<p>Đơn hàng không tồn tại.</p>";
-                return;
-            }
-
-            document.getElementById("order-id").textContent = order.orderId;
-            document.getElementById("order-date").textContent = order.date;
-            document.getElementById("order-status").textContent = getStatusText(order.status);
-            document.getElementById("order-total").textContent = formatPrice(order.total);
-
-            const tbody = document.getElementById("order-items");
-            tbody.innerHTML = "";
-            order.items.forEach(item => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td>${item.size}</td>
-                    <td>${item.color}</td>
-                    <td>${item.quantity}</td>
-                    <td>${formatPrice(item.price)}</td>
-                    <td>${formatPrice(item.price * item.quantity)}</td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            const cancelSection = document.getElementById("cancel-order-section");
-            cancelSection.innerHTML = "";
-            if (order.status === "pending") {
-                const cancelButton = document.createElement("button");
-                cancelButton.className = "btn-cancel";
-                cancelButton.textContent = "Hủy đơn hàng";
-                cancelButton.onclick = () => cancelOrder(order.orderId);
-                cancelSection.appendChild(cancelButton);
-            }
-        }
-
-        function cancelOrder(orderId) {
-            const order = orders.find(o => o.orderId === orderId);
-            if (order && confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
-                order.status = "cancelled";
-                alert("Đơn hàng đã được hủy!");
-                window.location.href = "/src/main/webapp/pages/orders.html";
-            }
-        }
-
-        // Tải chi tiết đơn hàng khi trang được tải
-        document.addEventListener("DOMContentLoaded", loadOrderDetails);
-
-        // Sự kiện điều hướng sidebar
-        const sidebarLinks = {
-            "profile": "/src/main/webapp/pages/profile.html",
-            "changePassword": "/src/main/webapp/pages/change-password.html",
-            "promotions": "/src/main/webapp/pages/promotions.html",
-            "verification": "/src/main/webapp/pages/verification.html",
-            "logout": "/src/main/webapp/pages/logout.html"
-        };
-
-        Object.keys(sidebarLinks).forEach(id => {
-            document.getElementById(id)?.addEventListener("click", () => {
-                window.location.href = sidebarLinks[id];
-            });
         });
+        
     </script>
 </body>
 </html>

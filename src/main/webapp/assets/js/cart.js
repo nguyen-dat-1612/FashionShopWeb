@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <i class="bi bi-cart-x" style="font-size: 3rem; color: #6c757d;"></i>
         <h4 class="mt-3">Giỏ hàng của bạn đang trống</h4>
         <p>Hãy thêm sản phẩm vào giỏ hàng để bắt đầu mua sắm</p>
-        <a href="/src/main/webapp/pages/products.html" class="btn btn-primary mt-3">Tiếp tục mua sắm</a>
+        <a href="/src/main/webapp/pages/home.html" class="btn btn-primary mt-3">Tiếp tục mua sắm</a>
       </div>
     `;
     

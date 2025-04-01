@@ -290,70 +290,70 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  // Mua ngay
-  document.getElementById("buyNowBtn").onclick = () => {
-    try {
-      // Kiểm tra đăng nhập
-      const token = localStorage.getItem("token");
-      const userId = JSON.parse(localStorage.getItem("userId") || "null");
+  // // Mua ngay
+  // document.getElementById("buyNowBtn").onclick = () => {
+  //   try {
+  //     // Kiểm tra đăng nhập
+  //     const token = localStorage.getItem("token");
+  //     const userId = JSON.parse(localStorage.getItem("userId") || "null");
       
-      if (!token || !userId) {
-        showErrorMessage("Vui lòng đăng nhập để tiếp tục mua hàng");
-        return;
-      }
+  //     if (!token || !userId) {
+  //       showErrorMessage("Vui lòng đăng nhập để tiếp tục mua hàng");
+  //       return;
+  //     }
       
-      // Lấy thông tin sản phẩm đã chọn
-      const selectedColor = document.querySelector('.color-options .active')?.textContent?.trim();
-      const selectedSize = document.querySelector('.size-options .active')?.textContent?.trim();
-      const quantity = parseInt(quantityInput.value) || 1;
+  //     // Lấy thông tin sản phẩm đã chọn
+  //     const selectedColor = document.querySelector('.color-options .active')?.textContent?.trim();
+  //     const selectedSize = document.querySelector('.size-options .active')?.textContent?.trim();
+  //     const quantity = parseInt(quantityInput.value) || 1;
       
-      // Validate dữ liệu
-      if (!selectedColor || !selectedSize) {
-        showErrorMessage('Vui lòng chọn đầy đủ màu và kích thước');
-        return;
-      }
+  //     // Validate dữ liệu
+  //     if (!selectedColor || !selectedSize) {
+  //       showErrorMessage('Vui lòng chọn đầy đủ màu và kích thước');
+  //       return;
+  //     }
       
-      if (isNaN(quantity)) {
-        showErrorMessage('Số lượng không hợp lệ');
-        return;
-      }
+  //     if (isNaN(quantity)) {
+  //       showErrorMessage('Số lượng không hợp lệ');
+  //       return;
+  //     }
 
-      // Tìm productVariant_id tương ứng
-      const selectedVariant = product.productVariantList?.find(v => 
-        v.color?.trim() === selectedColor && 
-        v.size?.trim() === selectedSize
-      );
+  //     // Tìm productVariant_id tương ứng
+  //     const selectedVariant = product.productVariantList?.find(v => 
+  //       v.color?.trim() === selectedColor && 
+  //       v.size?.trim() === selectedSize
+  //     );
       
-      if (!selectedVariant) {
-        showErrorMessage('Không tìm thấy sản phẩm với màu và kích thước đã chọn');
-        return;
-      }
+  //     if (!selectedVariant) {
+  //       showErrorMessage('Không tìm thấy sản phẩm với màu và kích thước đã chọn');
+  //       return;
+  //     }
       
-      // Tạo đối tượng dữ liệu giống như cart item để chuyển đến trang thanh toán
-      const selectedCartItems = [{
-        id: 0, // Không có cart ID vì mua trực tiếp
-        productVariant: {
-          id: selectedVariant.id,
-          color: selectedColor,
-          size: selectedSize,
-          price: parseFloat(product.price),
-          image: selectedVariant.image || product.thumbnail
-        },
-        quantity: quantity,
-        totalPrice: parseFloat(product.price) * quantity
-      }];
+  //     // Tạo đối tượng dữ liệu giống như cart item để chuyển đến trang thanh toán
+  //     const selectedCartItems = [{
+  //       id: 0, // Không có cart ID vì mua trực tiếp
+  //       productVariant: {
+  //         id: selectedVariant.id,
+  //         color: selectedColor,
+  //         size: selectedSize,
+  //         price: parseFloat(product.price),
+  //         image: selectedVariant.image || product.thumbnail
+  //       },
+  //       quantity: quantity,
+  //       totalPrice: parseFloat(product.price) * quantity
+  //     }];
       
-      console.log("[DEBUG] Item mua ngay:", selectedCartItems);
+  //     console.log("[DEBUG] Item mua ngay:", selectedCartItems);
       
-      // Lưu vào localStorage
-      localStorage.setItem("selectedCartItems", JSON.stringify(selectedCartItems));
-      localStorage.setItem("isBuyNow", "true"); // Đánh dấu là mua ngay
+  //     // Lưu vào localStorage
+  //     localStorage.setItem("selectedCartItems", JSON.stringify(selectedCartItems));
+  //     localStorage.setItem("isBuyNow", "true"); // Đánh dấu là mua ngay
       
-      // Chuyển hướng đến trang thanh toán
-      window.location.href = "/src/main/webapp/pages/checkout.html";
-    } catch (error) {
-      console.error("Lỗi khi xử lý mua ngay:", error);
-      showErrorMessage("Có lỗi xảy ra khi xử lý đơn hàng");
-    }
-  };
+  //     // Chuyển hướng đến trang thanh toán
+  //     window.location.href = "/src/main/webapp/pages/checkout.html";
+  //   } catch (error) {
+  //     console.error("Lỗi khi xử lý mua ngay:", error);
+  //     showErrorMessage("Có lỗi xảy ra khi xử lý đơn hàng");
+  //   }
+  // };
 });
