@@ -46,6 +46,201 @@ function setupLogin() {
         registerForm.addEventListener("submit", handleRegisterSubmit);
     }
 }
+
+// // Thiết lập sự kiện đăng ký 
+// function setupRegister() {
+//     console.log('Thiết lập sự kiện đăng ký');
+    
+//     const registerForm = document.getElementById('registerForm');
+//     const passwordInput = document.getElementById('registerPassword');
+//     const confirmPasswordInput = document.getElementById('confirmPassword');
+//     const passwordError = document.getElementById('passwordError');
+//     const registerMessage = document.getElementById('registerMessage');
+    
+//     // Kiểm tra sự tồn tại của các phần tử
+//     if (!registerForm) {
+//         console.error('Không tìm thấy form đăng ký');
+//         return;
+//     }
+    
+//     // Kiểm tra mật khẩu trùng khớp khi nhập
+//     if (confirmPasswordInput && passwordInput) {
+//         confirmPasswordInput.addEventListener('input', validatePassword);
+//         passwordInput.addEventListener('input', validatePassword);
+//     }
+    
+//     // Xử lý sự kiện submit form
+//     registerForm.addEventListener('submit', function(e) {
+//         e.preventDefault();
+        
+//         // Validate trước khi submit
+//         if (!validateForm()) {
+//             return;
+//         }
+        
+//         // Lấy dữ liệu từ form
+//         const formData = getFormData();
+        
+//         // Gửi dữ liệu (có thể là AJAX call)
+//         submitRegistration(formData);
+//     });
+    
+//     function validatePassword() {
+//         if (passwordInput.value !== confirmPasswordInput.value) {
+//             if (passwordError) {
+//                 passwordError.style.display = 'block';
+//             }
+//             confirmPasswordInput.setCustomValidity('Mật khẩu không khớp');
+//             return false;
+//         } else {
+//             if (passwordError) {
+//                 passwordError.style.display = 'none';
+//             }
+//             confirmPasswordInput.setCustomValidity('');
+//             return true;
+//         }
+//     }
+    
+//     function validateForm() {
+//         // Kiểm tra tất cả các trường bắt buộc
+//         if (!registerForm.checkValidity()) {
+//             registerForm.classList.add('was-validated');
+//             return false;
+//         }
+        
+//         // Kiểm tra mật khẩu
+//         if (!validatePassword()) {
+//             return false;
+//         }
+        
+//         // Thêm các validation khác nếu cần
+//         return true;
+//     }
+    
+//     function getFormData() {
+//         return {
+//             fullname: document.getElementById('registerFullname').value,
+//             email: document.getElementById('registerEmail').value,
+//             password: passwordInput.value,
+//             phone: document.getElementById('registerPhone').value,
+//             address: document.getElementById('registerAddress').value,
+//             gender: document.querySelector('input[name="registerGender"]:checked').value,
+//             birthday: document.getElementById('registerBirthday').value
+//         };
+//     }
+// }
+// // Gắn sự kiện mới
+// registerForm.addEventListener('submit', function(e) {
+//     console.log('Sự kiện submit được kích hoạt');
+//     handleRegisterSubmit(e).catch(error => {
+//         console.error('Lỗi khi xử lý đăng ký:', error);
+//     });
+// });
+// Xử lý submit form đăng ký
+
+async function handleRegisterSubmit(e) {
+    e.preventDefault();
+    console.log('Form đăng ký được submit');
+
+    const registerForm = document.getElementById('registerForm');
+    const registerBtn = document.getElementById('registerBtn');
+    const registerMessage = document.getElementById('registerMessage');
+    const passwordInput = document.getElementById('registerPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    
+    if (!registerForm || !registerBtn) {
+        console.error('Không tìm thấy các phần tử cần thiết');
+        return;
+    }
+
+    try {
+        // ========== VALIDATION ==========
+        // Kiểm tra mật khẩu trùng khớp
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            throw new Error('Mật khẩu xác nhận không khớp');
+        }
+
+        // Kiểm tra các trường bắt buộc
+        if (!registerForm.checkValidity()) {
+            registerForm.classList.add('was-validated');
+            throw new Error('Vui lòng điền đầy đủ thông tin bắt buộc');
+        }
+
+        // ========== LẤY DỮ LIỆU FORM ==========
+        const formData = {
+            fullname: document.getElementById('registerFullname').value,
+            email: document.getElementById('registerEmail').value,
+            password: passwordInput.value,
+            phone: document.getElementById('registerPhone').value,
+            address: document.getElementById('registerAddress').value,
+            gender: document.querySelector('input[name="registerGender"]:checked').value,
+            birthday: document.getElementById('registerBirthday').value
+            
+        };
+        
+        // ========== UI LOADING STATE ==========
+        registerBtn.disabled = true;
+        registerBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang xử lý...';
+        
+        if (registerMessage) {
+            registerMessage.style.display = 'none';
+        }
+
+        // ========== GỬI REQUEST ==========
+        const response = await fetch('http://localhost:8080/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Đăng ký thất bại, vui lòng thử lại');
+        }
+
+        // ========== XỬ LÝ THÀNH CÔNG ==========
+        console.log('Đăng ký thành công:', data);
+        
+        // Hiển thị thông báo
+        if (registerMessage) {
+            registerMessage.textContent = 'Đăng ký thành công! Vui lòng kiểm tra email để xác thực.';
+            registerMessage.className = 'alert alert-success';
+            registerMessage.style.display = 'block';
+        }
+        
+        // Reset form sau 2 giây
+        setTimeout(() => {
+            registerForm.reset();
+            registerForm.classList.remove('was-validated');
+            
+            // Đóng modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+            if (modal) modal.hide();
+            
+            if (registerMessage) {
+                registerMessage.style.display = 'none';
+            }
+        }, 2000);
+
+    } catch (error) {
+        console.error('Lỗi đăng ký:', error);
+        
+        // Hiển thị thông báo lỗi
+        if (registerMessage) {
+            registerMessage.textContent = error.message;
+            registerMessage.className = 'alert alert-danger';
+            registerMessage.style.display = 'block';
+        }
+    } finally {
+        // Khôi phục trạng thái nút
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Đăng Ký';
+    }
+}
 // Xử lý submit form đăng nhập
 async function handleLoginSubmit(e) {
     e.preventDefault();
@@ -236,53 +431,6 @@ function handleCartClick() {
         showToast("Vui lòng đăng nhập để xem giỏ hàng", "info");
     }
 }
-
-// Xử lý submit form đăng ký
-async function handleRegisterSubmit(e) {
-    e.preventDefault();
-    console.log("Form đăng ký được submit");
-
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    console.log("Thông tin đăng ký:", { email, password, confirmPassword });
-
-    if (password !== confirmPassword) {
-        console.log("Mật khẩu không khớp");
-        showToast("Mật khẩu không khớp!", "error");
-        return;
-    }
-
-    try {
-        const response = await fetch("http://localhost:8080/api/auth/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        console.log("Kết quả đăng ký từ API:", result);
-
-        if (result.code === 200) {
-            console.log("Đăng ký thành công");
-            showToast("Đăng ký thành công! Vui lòng đăng nhập.", "success");
-            bootstrap.Modal.getInstance(document.getElementById("registerModal")).hide();
-        } else {
-            console.log("Đăng ký thất bại:", result.message);
-            showToast(`Đăng ký thất bại: ${result.message}`, "error");
-        }
-    } catch (error) {
-        console.error("Lỗi khi đăng ký:", error);
-        showToast("Có lỗi xảy ra, vui lòng thử lại!", "error");
-    }
-}
-
 // Lấy thông tin user từ API
 async function fetchUserInfo(token) {
     try {

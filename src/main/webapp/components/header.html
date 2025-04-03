@@ -61,32 +61,86 @@
             </div>
         </div>
 
-        <!-- Modal Register -->
         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Đăng Ký Fashion Style</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="registerForm">
-                            <div class="mb-3">
-                                <label for="registerEmail" class="form-label">Địa chỉ Email</label>
-                                <input type="email" class="form-control" id="registerEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="registerPassword" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
-                                <input type="password" class="form-control" id="confirmPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Đăng Ký</button>
-                        </form>
-                    </div>
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="registerModalLabel">Đăng Ký Fashion Style</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                  <form id="registerForm">
+                    <!-- Họ và tên -->
+                    <div class="mb-3">
+                      <label for="registerFullname" class="form-label">Họ và tên</label>
+                      <input type="text" class="form-control" id="registerFullname" required>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="mb-3">
+                      <label for="registerEmail" class="form-label">Địa chỉ Email</label>
+                      <input type="email" class="form-control" id="registerEmail" required>
+                      <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                    </div>
+                    
+                    <!-- Mật khẩu -->
+                    <div class="mb-3">
+                      <label for="registerPassword" class="form-label">Mật khẩu (tối thiểu 6 ký tự)</label>
+                      <input type="password" class="form-control" id="registerPassword" minlength="6" required>
+                    </div>
+                    
+                    <!-- Xác nhận mật khẩu -->
+                    <div class="mb-3">
+                      <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                      <input type="password" class="form-control" id="confirmPassword" required>
+                      <div id="passwordError" class="invalid-feedback" style="display: none">
+                        Mật khẩu không khớp!
+                      </div>
+                    </div>
+                    
+                    <!-- Số điện thoại -->
+                    <div class="mb-3">
+                      <label for="registerPhone" class="form-label">Số điện thoại</label>
+                      <input type="tel" class="form-control" id="registerPhone">
+                    </div>
+                    
+                    <!-- Địa chỉ -->
+                    <div class="mb-3">
+                      <label for="registerAddress" class="form-label">Địa chỉ</label>
+                      <input type="text" class="form-control" id="registerAddress">
+                    </div>
+                    
+                    <!-- Giới tính -->
+                    <div class="mb-3">
+                      <label class="form-label">Giới tính</label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="registerGender" id="registerGenderMale" value="male">
+                        <label class="form-check-label" for="registerGenderMale">Nam</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="registerGender" id="registerGenderFemale" value="female">
+                        <label class="form-check-label" for="registerGenderFemale">Nữ</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="registerGender" id="registerGenderOther" value="other" checked>
+                        <label class="form-check-label" for="registerGenderOther">Khác</label>
+                      </div>
+                    </div>
+                    
+                    <!-- Ngày sinh -->
+                    <div class="mb-3">
+                      <label for="registerBirthday" class="form-label">Ngày sinh</label>
+                      <input type="date" class="form-control" id="registerBirthday">
+                    </div>
+                    
+                    <!-- Thông báo -->
+                    <div id="registerMessage" class="mb-3 alert" style="display: none"></div>
+                    
+                    <!-- Nút đăng ký -->
+                    <button type="submit" class="btn btn-primary w-100" id="registerBtn">Đăng Ký</button>
+                  </form>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
     </div>
