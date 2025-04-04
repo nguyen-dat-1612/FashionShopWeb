@@ -118,24 +118,112 @@ function updateProfileInfo(userData) {
     if (userData.img) {
         document.getElementById("avatar-img").src = userData.img;
     }
-    
-
 }
 
 // Tải dữ liệu khi trang được tải
 window.onload = async () => {
     const userData = await fetchUserData();
     updateProfileInfo(userData);
+    
+    // Mặc định cho phép chỉnh sửa luôn (không cần nút chỉnh sửa riêng)
+    toggleEditMode(true);
 
-    // Thêm chức năng lưu thay đổi (tạm thời chỉ là alert)
+    // Xử lý sự kiện cho nút lưu thay đổi
     const saveBtn = document.querySelector(".save-btn");
-    saveBtn.addEventListener("click", () => {
-        alert("Chức năng lưu thay đổi sẽ được cập nhật sau!");
+    saveBtn.addEventListener("click", async () => {
+        try {
+            const userId = localStorage.getItem("userId").replace(/^"+|"+$/g, '');
+            
+            const updatedData = {
+                fullname: document.getElementById("fullname").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+                gender: document.getElementById("gender").value,
+                birthday: document.getElementById("birthday").value
+            };
+
+            const updatedUser = await updateUser(userId, updatedData);
+            updateProfileInfo(updatedUser);
+            
+            alert("Cập nhật thông tin thành công!");
+        } catch (error) {
+            console.error("Lỗi khi cập nhật:", error);
+            alert(`Cập nhật thất bại: ${error.message}`);
+        }
     });
 
     // Thêm chức năng chỉnh sửa ảnh (tạm thời chỉ là alert)
-    const editBtn = document.querySelector(".edit-btn");
-    editBtn.addEventListener("click", () => {
+    const editAvatarBtn = document.querySelector(".edit-btn");
+    editAvatarBtn.addEventListener("click", () => {
         alert("Chức năng chỉnh sửa ảnh sẽ được cập nhật sau!");
     });
 };
+
+// Hàm cập nhật thông tin người dùng
+async function updateUser(userId, updatedData) {
+    try {
+        console.log("[UpdateUser] Bắt đầu cập nhật thông tin người dùng");
+        console.log("[UpdateUser] UserID:", userId);
+        console.log("[UpdateUser] Dữ liệu cập nhật:", updatedData);
+        
+        const token = localStorage.getItem("token");
+        console.log("[UpdateUser] Token:", token);
+        
+        if (!token) {
+            console.warn("[UpdateUser] Không tìm thấy token, chuyển hướng đến trang login");
+            window.location.href = "/src/main/webapp/pages/login.html";
+            return;
+        }
+
+        console.log("[UpdateUser] Chuẩn bị gọi API PATCH:", `http://localhost:8080/api/users/${userId}/update`);
+        
+        const response = await fetch(`http://localhost:8080/api/users/${userId}/update`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        console.log("[UpdateUser] Phản hồi từ API - Status:", response.status, response.statusText);
+        
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            console.error("[UpdateUser] Chi tiết lỗi từ API:", errorResponse);
+            throw new Error(errorResponse.message || "Cập nhật thông tin thất bại");
+        }
+
+        const apiResponse = await response.json();
+        console.log("[UpdateUser] Dữ liệu nhận được từ API sau cập nhật:", apiResponse);
+        
+        return apiResponse.data;
+    } catch (error) {
+        console.error("[UpdateUser] Lỗi trong quá trình cập nhật:", error);
+        throw error;
+    }
+}
+// Hàm bật/tắt chế độ chỉnh sửa
+function toggleEditMode(isEditMode) {
+    const inputs = document.querySelectorAll('.profile-info input, .profile-info select');
+    inputs.forEach(input => {
+        input.readOnly = !isEditMode;
+        input.disabled = !isEditMode;
+    });
+}
+
+// Hàm cập nhật dữ liệu lên giao diện
+function updateProfileInfo(userData) {
+    document.getElementById("user-id").textContent = userData.id || "null";
+    document.getElementById("fullname").value = userData.fullname || "null";
+    document.getElementById("gender").value = userData.gender || "null";
+    document.getElementById("phone").value = userData.phone || "null";
+    document.getElementById("email").value = userData.email || "null";
+    document.getElementById("address").value = userData.address || "null";
+    document.getElementById("birthday").value = userData.birthday || "null";
+    
+    if (userData.img) {
+        document.getElementById("avatar-img").src = userData.img;
+    }
+}
