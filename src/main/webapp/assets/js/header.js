@@ -212,7 +212,7 @@ async function handleRegisterSubmit(e) {
             registerMessage.style.display = 'block';
         }
         
-        // Reset form sau 2 giây
+        //Reset form sau 2 giây
         setTimeout(() => {
             registerForm.reset();
             registerForm.classList.remove('was-validated');
@@ -224,7 +224,7 @@ async function handleRegisterSubmit(e) {
             if (registerMessage) {
                 registerMessage.style.display = 'none';
             }
-        }, 2000);
+        }, 10001000);
 
     } catch (error) {
         console.error('Lỗi đăng ký:', error);
@@ -387,27 +387,27 @@ async function handleLoginSubmit(e) {
                         }
                     }
                     
-                    showToast("Đăng nhập thành công!", "success");
+                    // showToast("Đăng nhập thành công!", "success");
                 } else {
                     console.warn("userData trống hoặc undefined");
-                    showToast("Đăng nhập thành công nhưng dữ liệu người dùng trống", "warning");
+                    // showToast("Đăng nhập thành công nhưng dữ liệu người dùng trống", "warning");
                 }
             } catch (error) {
                 console.error("Lỗi khi lấy thông tin user:", error);
                 console.error("Stack trace:", error.stack);
-                showToast("Đăng nhập thành công nhưng không lấy được thông tin người dùng", "warning");
+                // showToast("Đăng nhập thành công nhưng không lấy được thông tin người dùng", "warning");
             }
         } else {
             console.warn("Đăng nhập thất bại:", result);
             console.log("Mã lỗi:", result.code);
             console.log("Thông báo lỗi:", result.message);
-            showToast(`Đăng nhập thất bại: ${result.message || "Không có thông báo lỗi"}`, "error");
+            // showToast(`Đăng nhập thất bại: ${result.message || "Không có thông báo lỗi"}`, "error");
         }
     } catch (error) {
         console.error("%c ❌ Lỗi khi đăng nhập: ", "background: #f44336; color: white; padding: 2px; border-radius: 2px;", error);
         console.error("Chi tiết lỗi:", error.message);
         console.error("Stack trace:", error.stack);
-        showToast(`Có lỗi xảy ra: ${error.message}`, "error");
+        // showToast(`Có lỗi xảy ra: ${error.message}`, "error");
     }
 }
 // Xử lý click vào profile
