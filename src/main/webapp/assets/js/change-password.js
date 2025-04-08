@@ -90,17 +90,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response.ok && result.code === 200) {
                 console.log('Đổi mật khẩu thành công');
-                showMessage(result.message || 'Đổi mật khẩu thành công!', 'success');
+                showMessage("Đổi mật khẩu thành công!", 'success');
                 resetForm();
                 
-                // Tự động chuyển hướng sau 2 giây
-                setTimeout(() => {
-                    window.location.href = "/src/main/webapp/pages/profile.html";
-                }, 2000);
+                // // Tự động chuyển hướng sau 2 giây
+                // setTimeout(() => {
+                //     window.location.href = "/src/main/webapp/pages/profile.html";
+                // }, 2000);
             } else {
                 console.error('Lỗi từ API:', result.code + result.message);
-                if (result.code === 400) {
-                    showMessage('Mật khẩu cũ không đúng', 'error');
+                if (result.code === 1003) {
+                    showMessage('Mật khẩu hiện tại không chính xác', 'error');
                 } else if (result.code === 401) {
                     showMessage('Bạn không có quyền thực hiện thao tác này', 'error');
                 } else if (result.code === 500) {

@@ -134,6 +134,7 @@ window.onload = async () => {
         try {
             const userId = localStorage.getItem("userId").replace(/^"+|"+$/g, '');
             
+
             const updatedData = {
                 fullname: document.getElementById("fullname").value,
                 email: document.getElementById("email").value,
@@ -143,13 +144,40 @@ window.onload = async () => {
                 birthday: document.getElementById("birthday").value
             };
 
+            console.log("[SaveBtn] Dữ liệu cập nhật:", updatedData);
+            
+            if (!updatedData.fullname || updatedData.fullname.trim() === "") {
+                showAlert("Họ tên không được để trống");
+                return;
+            }
+    
+            if (!updatedData.phone || updatedData.phone.trim().length < 8 || !/^\d+$/.test(updatedData.phone.trim())) {
+                showAlert("Số điện thoại không hợp lệ");
+                return;
+            }
+    
+            if (!updatedData.address || updatedData.address.trim() === "") {
+                showAlert("Địa chỉ không được để trống");
+                return;
+            }
+    
+            if (updatedData.gender !== "true" && updatedData.gender !== "false") {
+                showAlert("Giới tính không hợp lệ");
+                return;
+            }
+    
+            if (!updatedData.birthday || !/^\d{2}\/\d{2}\/\d{4}$/.test(updatedData.birthday.trim())) {
+                showAlert("Ngày sinh phải theo định dạng dd/MM/yyyy");
+                return;
+            }
+
             const updatedUser = await updateUser(userId, updatedData);
             updateProfileInfo(updatedUser);
             
             showAlert("Cập nhật thông tin thành công!");
         } catch (error) {
             console.error("Lỗi khi cập nhật:", error.message);
-            showAlert("Cập nhật thất bại!");
+            // showAlert("Cập nhật thất bại!");
         }
     });
 
@@ -166,18 +194,20 @@ async function updateUser(userId, updatedData) {
         console.log("[UpdateUser] Bắt đầu cập nhật thông tin người dùng");
         console.log("[UpdateUser] UserID:", userId);
         console.log("[UpdateUser] Dữ liệu cập nhật:", updatedData);
-        
+
         const token = localStorage.getItem("token");
         console.log("[UpdateUser] Token:", token);
-        
+
         if (!token) {
             console.warn("[UpdateUser] Không tìm thấy token, chuyển hướng đến trang login");
             window.location.href = "/src/main/webapp/pages/home.html";
             return;
         }
 
+    
+
         console.log("[UpdateUser] Chuẩn bị gọi API PATCH:", `http://localhost:8080/api/users/${userId}/update`);
-        
+
         const response = await fetch(`http://localhost:8080/api/users/${userId}/update`, {
             method: "PATCH",
             headers: {
@@ -188,23 +218,26 @@ async function updateUser(userId, updatedData) {
         });
 
         console.log("[UpdateUser] Phản hồi từ API - Status:", response.status, response.statusText);
-        
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            console.error("[UpdateUser] Chi tiết lỗi từ API:", errorResponse);
+
+        const apiResponse = await response.json();  // Đọc JSON trước
+
+        if (apiResponse.code !== 200) {
+            console.error("[UpdateUser] Chi tiết lỗi từ API:", apiResponse);
             showAlert("Cập nhật thông tin thất bại");
-            throw new Error(errorResponse.message || "Cập nhật thông tin thất bại");
+            throw new Error(apiResponse.message || "Cập nhật thông tin thất bại");
         }
 
-        const apiResponse = await response.json();
-        console.log("[UpdateUser] Dữ liệu nhận được từ API sau cập nhật:", apiResponse);
-        
+        console.log("Cập nhật thành công:", apiResponse);
+        showAlert("Cập nhật thông tin thành công!");
+
         return apiResponse.data;
+
     } catch (error) {
         console.error("[UpdateUser] Lỗi trong quá trình cập nhật:", error);
         throw error;
     }
 }
+
 
 function showAlert(message, duration = 3500) {
     const alertElement = document.getElementById("loginAlert");
