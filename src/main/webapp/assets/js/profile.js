@@ -49,7 +49,7 @@ async function fetchUserData() {
         
         if (!token) {
             console.warn("[3] Không tìm thấy token, chuyển hướng đến trang login");
-            window.location.href = "/src/main/webapp/pages/login.html";
+            window.location.href = "/src/main/webapp/pages/home.html";
             return;
         }
 
@@ -146,10 +146,10 @@ window.onload = async () => {
             const updatedUser = await updateUser(userId, updatedData);
             updateProfileInfo(updatedUser);
             
-            alert("Cập nhật thông tin thành công!");
+            showAlert("Cập nhật thông tin thành công!");
         } catch (error) {
-            console.error("Lỗi khi cập nhật:", error);
-            alert(`Cập nhật thất bại: ${error.message}`);
+            console.error("Lỗi khi cập nhật:", error.message);
+            showAlert("Cập nhật thất bại!");
         }
     });
 
@@ -172,7 +172,7 @@ async function updateUser(userId, updatedData) {
         
         if (!token) {
             console.warn("[UpdateUser] Không tìm thấy token, chuyển hướng đến trang login");
-            window.location.href = "/src/main/webapp/pages/login.html";
+            window.location.href = "/src/main/webapp/pages/home.html";
             return;
         }
 
@@ -192,6 +192,7 @@ async function updateUser(userId, updatedData) {
         if (!response.ok) {
             const errorResponse = await response.json();
             console.error("[UpdateUser] Chi tiết lỗi từ API:", errorResponse);
+            showAlert("Cập nhật thông tin thất bại");
             throw new Error(errorResponse.message || "Cập nhật thông tin thất bại");
         }
 
@@ -204,6 +205,28 @@ async function updateUser(userId, updatedData) {
         throw error;
     }
 }
+
+function showAlert(message, duration = 3500) {
+    const alertElement = document.getElementById("loginAlert");
+    
+    // Cập nhật nội dung với icon
+    alertElement.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>' + message;
+    
+    // Hiển thị với hiệu ứng
+    alertElement.classList.remove("d-none");
+    setTimeout(() => {
+      alertElement.classList.add("show");
+    }, 10); // Delay nhẹ để chạy transition
+    
+    // Ẩn sau khoảng thời gian
+    setTimeout(() => {
+      alertElement.classList.remove("show");
+      setTimeout(() => {
+        alertElement.classList.add("d-none");
+      }, 300); // Đợi hiệu ứng opacity hoàn tất
+    }, duration);
+  }
+
 // Hàm bật/tắt chế độ chỉnh sửa
 function toggleEditMode(isEditMode) {
     const inputs = document.querySelectorAll('.profile-info input, .profile-info select');

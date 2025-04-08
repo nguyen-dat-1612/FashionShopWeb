@@ -31,36 +31,38 @@
         </div>
     </nav>
 
-     <!-- Modals -->
-    <div id="modals">
-        <!-- Modal Login -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Đăng Nhập Fashion Style</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="loginForm">
-                            <div class="mb-3">
-                                <label for="loginEmail" class="form-label">Địa chỉ Email</label>
-                                <input type="email" class="form-control" id="loginEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="loginPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
-                        </form>
-                        <div class="text-center mt-3">
-                            <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Đăng Nhập Fashion Style</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <!-- Thêm thông báo lỗi -->
+                  <div id="loginMessage" class="alert alert-danger d-none mb-3"></div>
+                  
+                  <form id="loginForm">
+                      <div class="mb-3">
+                          <label for="loginEmail" class="form-label">Địa chỉ Email</label>
+                          <input type="email" class="form-control" id="loginEmail" required>
+                          <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                      </div>
+                      <div class="mb-3">
+                          <label for="loginPassword" class="form-label">Mật khẩu</label>
+                          <input type="password" class="form-control" id="loginPassword" required>
+                          <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
+                      </div>
+                      <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
+                  </form>
+                  <div class="text-center mt-3">
+                      <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">

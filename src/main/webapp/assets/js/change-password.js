@@ -98,8 +98,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     window.location.href = "/src/main/webapp/pages/profile.html";
                 }, 2000);
             } else {
-                console.error('Lỗi từ API:', result.message);
-                showMessage(result.message || 'Đổi mật khẩu thất bại', 'error');
+                console.error('Lỗi từ API:', result.code + result.message);
+                if (result.code === 400) {
+                    showMessage('Mật khẩu cũ không đúng', 'error');
+                } else if (result.code === 401) {
+                    showMessage('Bạn không có quyền thực hiện thao tác này', 'error');
+                } else if (result.code === 500) {
+                    showMessage('Có lỗi xảy ra trên máy chủ', 'error');
+                } else {
+                    showMessage(result.message || 'Đổi mật khẩu thất bại', 'error');
+                }
             }
         } catch (error) {
             console.error('Lỗi khi đổi mật khẩu:', error);

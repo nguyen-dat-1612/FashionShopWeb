@@ -400,3 +400,32 @@
     display: block;
   }
 }
+#loginAlert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  min-width: 300px;
+  max-width: 80%;
+  text-align: center;
+  padding: 15px 20px; /* Tăng padding cho rộng rãi */
+  border-radius: 8px; /* Bo góc */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Thêm bóng */
+  background-color: #fff3cd; /* Màu nền của alert-warning */
+  border: 1px solid #ffecb5; /* Viền nhẹ */
+  transition: opacity 0.3s ease; /* Hiệu ứng mờ dần khi ẩn */
+}
+
+#loginAlert.show {
+  opacity: 1;
+}
+
+#loginAlert.d-none {
+  opacity: 0; /* Ẩn bằng opacity để có hiệu ứng */
+}
+
+#loginAlert .bi {
+  font-size: 1.2em; /* Tăng kích thước icon */
+  vertical-align: middle; /* Căn giữa icon với text */
+}

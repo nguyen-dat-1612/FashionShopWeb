@@ -130,7 +130,7 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-/* .navbar {
+.navbar {
     background-color: #fff;
     padding: 15px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -169,15 +169,16 @@
 }
 
 .btn-outline-primary:hover {
-    background-color: #d4a373;
-    color: #fff;
+    background-color: #d4a373 !important;
+    color: #fff !important;
+    border-color: #d4a373 !important;
 }
 
 .btn-primary {
     background-color: #d4a373;
     border-color: #d4a373;
     color: #fff;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
@@ -224,4 +225,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-} */
+}
+
+/* Error message styles */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Loading spinner */
+.spinner-border {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+/* Invalid input styles */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid:focus ~ .invalid-feedback {
+    display: block;
+}
