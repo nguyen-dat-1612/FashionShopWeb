@@ -7,78 +7,6 @@
     <title>Chi Tiết Đơn Hàng - Fashion Store</title>
     <link rel="stylesheet" href="/src/main/webapp/assets/css/orders.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS bổ sung để đồng bộ với orders.css */
-        .order-info {
-            background-color: #f9f1e7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .order-info p {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #666;
-        }
-        .order-info p strong {
-            color: #333;
-        }
-        .order-items-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        .order-items-table th, .order-items-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-        }
-        .order-items-table th {
-            background-color: #f9f1e7;
-            color: #666;
-            font-weight: 600;
-        }
-        .order-total {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .btn-cancel {
-            background-color: #dc3545;
-            border: none;
-            color: #fff;
-            padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-right: 10px;
-            font-size: 14px; /* Đồng bộ kích thước chữ */
-        }
-        .btn-cancel:hover {
-            background-color: #b02a37;
-        }
-        .btn-back {
-            background-color: #d4a373;
-            border: none;
-            color: #fff;
-            padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 14px; /* Đồng bộ kích thước chữ */
-        }
-        .btn-back:hover {
-            background-color: #b88a5d;
-        }
-        #cancel-order-section {
-            display: inline-block;
-        }
-        
-    
-    </style>
-</head>
 <body>
     <div class="container">
         <!-- Sidebar Menu (giữ nguyên từ orders.html) -->
@@ -121,6 +49,29 @@
                 <p class="order-total"><strong>Tổng tiền:</strong> <span id="order-total"></span></p>
                 <div id="cancel-order-section"></div>
                 <button class="btn-back" onclick="window.location.href='/src/main/webapp/pages/orders.html'">Quay lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thông báo -->
+    <div id="notification-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <div class="modal-icon error-icon" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <h3 id="modal-title">Thông báo</h3>
+            <p id="modal-message">Nội dung thông báo</p>
+            <div class="modal-buttons">
+                <button id="modal-confirm" class="btn-primary">Xác nhận</button>
+                <button id="modal-cancel" class="btn-secondary">Hủy</button>
             </div>
         </div>
     </div>

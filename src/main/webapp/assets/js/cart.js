@@ -402,26 +402,26 @@ function formatPrice(price) {
 
 // Hàm hiển thị thông báo
 function showSuccessMessage(message) {
-  const toast = document.createElement("div");
-  toast.className = "alert alert-success position-fixed top-0 end-0 m-3";
-  toast.style.zIndex = "9999";
-  toast.innerHTML = `✓ ${message}`;
-  document.body.appendChild(toast);
-  
+  const toast = document.getElementById("success-toast");
+  const messageSpan = document.getElementById("success-message");
+
+  messageSpan.innerText = `✓ ${message}`;
+  toast.classList.remove("d-none");
+
   setTimeout(() => {
-    toast.remove();
+    toast.classList.add("d-none");
   }, 3000);
 }
 
 function showErrorMessage(message) {
-  const toast = document.createElement("div");
-  toast.className = "alert alert-danger position-fixed top-0 end-0 m-3";
-  toast.style.zIndex = "9999";
-  toast.innerHTML = `✗ ${message}`;
-  document.body.appendChild(toast);
-  
+  const toast = document.getElementById("error-toast");
+  const messageSpan = document.getElementById("error-message");
+
+  messageSpan.innerText = `✗ ${message}`;
+  toast.classList.remove("d-none");
+
   setTimeout(() => {
-    toast.remove();
+    toast.classList.add("d-none");
   }, 3000);
 }
 

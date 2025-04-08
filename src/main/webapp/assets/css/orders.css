@@ -239,3 +239,193 @@ body {
     text-decoration: none; /* Loại bỏ gạch dưới */
     color: inherit; /* Giữ nguyên màu chữ */
 }
+.order-info {
+    background-color: #f9f1e7;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.order-info p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #666;
+}
+.order-info p strong {
+    color: #333;
+}
+.order-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.order-items-table th, .order-items-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+.order-items-table th {
+    background-color: #f9f1e7;
+    color: #666;
+    font-weight: 600;
+}
+.order-total {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+.btn-cancel {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    font-size: 14px; /* Đồng bộ kích thước chữ */
+}
+.btn-cancel:hover {
+    background-color: #b02a37;
+}
+.btn-back {
+    background-color: #d4a373;
+    border: none;
+    color: #fff;
+    padding: 8px 15px; /* Kích thước rõ ràng, đồng bộ với detail-btn */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px; /* Đồng bộ kích thước chữ */
+}
+.btn-back:hover {
+    background-color: #b88a5d;
+}
+#cancel-order-section {
+    display: inline-block;
+}
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.modal-icon {
+    margin: 0 auto 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.error-icon {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+#modal-title {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+#modal-message {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #388e3c;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+
+/* Thêm style cho nút hủy đơn hàng */
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
+}

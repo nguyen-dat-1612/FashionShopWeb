@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             if (data.code === 200) {
+                console.log(data.data);  // In ra dữ liệu đơn hàng
                 displayOrders(data.data);
             } else {
                 throw new Error(data.message || 'Lỗi không xác định');

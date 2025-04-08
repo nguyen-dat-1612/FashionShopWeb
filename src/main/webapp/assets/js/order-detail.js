@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const userId = JSON.parse(localStorage.getItem("userId"));
     
     if (!token || !userId) {
-        alert('Vui lòng đăng nhập để xem chi tiết đơn hàng');
-        window.location.href = "/src/main/webapp/pages/home.html";
+        showNotification('error', 'Thông báo', 'Vui lòng đăng nhập để xem chi tiết đơn hàng', () => {
+            window.location.href = "/src/main/webapp/pages/home.html";
+        });
         return;
     }
 
@@ -23,7 +24,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Xử lý sự kiện sidebar
     setupSidebarLinks();
+
+    // Setup modal events
+    setupModalEvents();
 });
+
+function setupModalEvents() {
+    // Đóng modal khi click vào nút đóng
+    document.querySelector('.close-modal').addEventListener('click', function() {
+        document.getElementById('notification-modal').style.display = 'none';
+    });
+
+    // Đóng modal khi click bên ngoài modal
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('notification-modal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+function showNotification(type, title, message, confirmCallback = null, showCancelButton = false) {
+    const modal = document.getElementById('notification-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const confirmBtn = document.getElementById('modal-confirm');
+    const cancelBtn = document.getElementById('modal-cancel');
+    const successIcon = document.querySelector('.success-icon');
+    const errorIcon = document.querySelector('.error-icon');
+
+    // Set content
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+
+    // Show/hide icons based on type
+    if (type === 'success') {
+        successIcon.style.display = 'flex';
+        errorIcon.style.display = 'none';
+    } else {
+        successIcon.style.display = 'none';
+        errorIcon.style.display = 'flex';
+    }
+
+    // Set up confirm button
+    confirmBtn.onclick = function() {
+        modal.style.display = 'none';
+        if (confirmCallback) confirmCallback();
+    };
+
+    // Show/hide cancel button
+    if (showCancelButton) {
+        cancelBtn.style.display = 'block';
+        cancelBtn.onclick = function() {
+            modal.style.display = 'none';
+        };
+    } else {
+        cancelBtn.style.display = 'none';
+    }
+
+    // Show modal
+    modal.style.display = 'block';
+}
 
 function loadOrderDetails(orderId, userId, token) {
     showLoading();
@@ -44,7 +105,8 @@ function loadOrderDetails(orderId, userId, token) {
     })
     .then(data => {
         if (data.code === 200) {
-            displayOrderDetails(data.data, userId, token);  // Thêm userId và token
+            console.log(data.data);  // In ra dữ liệu chi tiết đơn hàng
+            displayOrderDetails(data.data, userId, token);
         } else {
             throw new Error(data.message || 'Lỗi từ server');
         }
@@ -55,7 +117,7 @@ function loadOrderDetails(orderId, userId, token) {
     });
 }
 
-function displayOrderDetails(order, userId, token) {  // Thêm params userId và token
+function displayOrderDetails(order, userId, token) {
     // Hiển thị thông tin cơ bản
     document.getElementById("order-id").textContent = order.id;
     document.getElementById("order-date").textContent = formatDate(order.date);
@@ -96,41 +158,93 @@ function displayOrderDetails(order, userId, token) {  // Thêm params userId và
         cancelSection.appendChild(cancelButton);
     }
 }
-
 function cancelOrder(orderId, userId, token) {
-    if (!confirm("Bạn có chắc muốn hủy đơn hàng này?")) return;
+    // Hiển thị modal xác nhận
+    const modal = document.getElementById('notification-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const confirmBtn = document.getElementById('modal-confirm');
+    const cancelBtn = document.getElementById('modal-cancel');
+
+    modalTitle.textContent = 'XÁC NHẬN HỦY ĐƠN HÀNG';
+    modalMessage.textContent = 'Bạn có chắc muốn hủy đơn hàng này?';
     
-    fetch(`http://localhost:8080/api/orders/${userId}/${orderId}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => {
-                throw new Error(err.message || `Lỗi HTTP: ${response.status}`);
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.code === 200) {
-            alert("Đơn hàng đã được hủy thành công!");
-            // Thay vì reload, chuyển hướng về trang orders.html
-            window.location.href = '/src/main/webapp/pages/orders.html';
-        } else {
-            throw new Error(data.message || 'Lỗi khi hủy đơn hàng');
-        }
-    })
-    .catch(error => {
-        console.error("Lỗi khi hủy đơn hàng:", error);
-        alert(error.message);
-    });
+    // Hiển thị nút Hủy
+    cancelBtn.style.display = 'block';
+    
+    // Xử lý sự kiện nút Xác nhận
+    confirmBtn.onclick = function() {
+        modal.style.display = 'none';
+        
+        // Gọi API hủy đơn hàng
+        fetch(`http://localhost:8080/api/orders/${userId}/${orderId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.message || `Lỗi HTTP: ${response.status}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.code === 200) {
+                // Hiển thị thông báo thành công
+                modalTitle.textContent = 'THÔNG BÁO';
+                modalMessage.textContent = 'Đơn hàng đã được hủy thành công!';
+                cancelBtn.style.display = 'none';
+                
+                confirmBtn.onclick = function() {
+                    window.location.href = '/src/main/webapp/pages/orders.html';
+                }
+                
+                modal.style.display = 'block';
+            } else {
+                throw new Error(data.message || 'Lỗi khi hủy đơn hàng');
+            }
+        })
+        .catch(error => {
+            console.error("Lỗi khi hủy đơn hàng:", error);
+            
+            // Hiển thị thông báo lỗi
+            modalTitle.textContent = 'THÔNG BÁO';
+            modalMessage.textContent = error.message;
+            cancelBtn.style.display = 'none';
+            
+            confirmBtn.onclick = function() {
+                modal.style.display = 'none';
+            }
+            
+            modal.style.display = 'block';
+        });
+    };
+    
+    // Xử lý sự kiện nút Hủy
+    cancelBtn.onclick = function() {
+        modal.style.display = 'none';
+    };
+    
+    // Hiển thị modal
+    modal.style.display = 'block';
 }
 
+// Đóng modal khi click vào nút đóng
+document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('notification-modal').style.display = 'none';
+});
 
+// Đóng modal khi click bên ngoài modal
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('notification-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
 // Các hàm helper
 function showLoading() {
     document.getElementById("order-items").innerHTML = '<tr><td colspan="6">Đang tải...</td></tr>';
