@@ -54,53 +54,86 @@ function setupLogin() {
 
 async function handleRegisterSubmit(e) {
     e.preventDefault();
-    console.log('Form đăng ký được submit');
 
     const registerForm = document.getElementById('registerForm');
     const registerBtn = document.getElementById('registerBtn');
     const registerMessage = document.getElementById('registerMessage');
+
+    const fullnameInput = document.getElementById('registerFullname');
+    const emailInput = document.getElementById('registerEmail');
     const passwordInput = document.getElementById('registerPassword');
     const confirmPasswordInput = document.getElementById('confirmPassword');
-    
+    const phoneInput = document.getElementById('registerPhone');
+    const addressInput = document.getElementById('registerAddress');
+    const birthdayInput = document.getElementById('registerBirthday');
+
+    const genderInput = document.querySelector('input[name="registerGender"]:checked');
+
     if (!registerForm || !registerBtn) {
         console.error('Không tìm thấy các phần tử cần thiết');
         return;
     }
 
     try {
-        // ========== VALIDATION ==========
-        // Kiểm tra mật khẩu trùng khớp
+        // Reset thông báo
+        if (registerMessage) {
+            registerMessage.style.display = 'none';
+            registerMessage.className = 'alert';
+            registerMessage.textContent = '';
+        }
+
+        // ==== VALIDATION TÙY BIẾN ====
+        if (!fullnameInput.value.trim()) {
+            throw new Error('Họ và tên không được để trống');
+        }
+
+        if (!emailInput.value.trim()) {
+            throw new Error('Email không được để trống');
+        }
+
+        if (!passwordInput.value.trim()) {
+            throw new Error('Mật khẩu không được để trống');
+        }
+
+        if (passwordInput.value.length < 6) {
+            throw new Error('Mật khẩu phải có ít nhất 6 ký tự');
+        }
+
         if (passwordInput.value !== confirmPasswordInput.value) {
             throw new Error('Mật khẩu xác nhận không khớp');
         }
 
-        // Kiểm tra các trường bắt buộc
-        if (!registerForm.checkValidity()) {
-            registerForm.classList.add('was-validated');
-            throw new Error('Vui lòng điền đầy đủ thông tin bắt buộc');
+        if (!phoneInput.value.trim()) {
+            throw new Error('Số điện thoại không được để trống');
         }
 
-        // ========== LẤY DỮ LIỆU FORM ==========
+        if (!addressInput.value.trim()) {
+            throw new Error('Địa chỉ không được để trống');
+        }
+
+        if (!genderInput) {
+            throw new Error('Vui lòng chọn giới tính');
+        }
+
+        if (!birthdayInput.value) {
+            throw new Error('Vui lòng chọn ngày sinh');
+        }
+
+        // ==== LẤY DỮ LIỆU ====
         const formData = {
-            fullname: document.getElementById('registerFullname').value,
-            email: document.getElementById('registerEmail').value,
+            fullname: fullnameInput.value.trim(),
+            email: emailInput.value.trim(),
             password: passwordInput.value,
-            phone: document.getElementById('registerPhone').value,
-            address: document.getElementById('registerAddress').value,
-            gender: document.querySelector('input[name="registerGender"]:checked').value,
-            birthday: document.getElementById('registerBirthday').value
-            
+            phone: phoneInput.value.trim(),
+            address: addressInput.value.trim(),
+            gender: genderInput.value,
+            birthday: birthdayInput.value
         };
-        
-        // ========== UI LOADING STATE ==========
+
+        // ==== LOADING ====
         registerBtn.disabled = true;
         registerBtn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Đang xử lý...';
-        
-        if (registerMessage) {
-            registerMessage.style.display = 'none';
-        }
 
-        // ========== GỬI REQUEST ==========
         const response = await fetch('http://localhost:8080/api/users/register', {
             method: 'POST',
             headers: {
@@ -116,39 +149,35 @@ async function handleRegisterSubmit(e) {
             throw new Error(data.message || 'Đăng ký thất bại, vui lòng thử lại');
         }
 
-        // ========== XỬ LÝ THÀNH CÔNG ==========
-        console.log('Đăng ký thành công:', data);
-        
+        // ==== THÀNH CÔNG ====
         showMessage('success', 'Đăng ký thành công! Vui lòng kiểm tra email để xác thực.');
-        
-        //Reset form sau 2 giây
+
         setTimeout(() => {
             registerForm.reset();
             registerForm.classList.remove('was-validated');
-            
-            // Đóng modal
+
             const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
             if (modal) modal.hide();
-            
+
             if (registerMessage) {
                 registerMessage.style.display = 'none';
             }
         }, 4000);
 
     } catch (error) {
-        console.error('Lỗi đăng ký:', error);
-        
         showMessage('danger', error.message);
     } finally {
-        // Khôi phục trạng thái nút
         registerBtn.disabled = false;
         registerBtn.textContent = 'Đăng Ký';
     }
 }
-function showMessage(type, text) {
+
+function showMessage(type, message) {
+    const registerMessage = document.getElementById('registerMessage');
     if (!registerMessage) return;
-    registerMessage.textContent = text;
+
     registerMessage.className = `alert alert-${type}`;
+    registerMessage.textContent = message;
     registerMessage.style.display = 'block';
 }
 // Xử lý submit form đăng nhập

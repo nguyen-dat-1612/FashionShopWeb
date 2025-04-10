@@ -154,12 +154,23 @@ document.addEventListener("DOMContentLoaded", function() {
             
         } catch (error) {
             console.error('Lỗi khi đặt hàng:', error);
-            alert('Đã xảy ra lỗi khi đặt hàng: ' + error.message);
+            showErrorMessage("Sản phẩm này vượt quá số lượng tồn kho hoặc không còn khả dụng. Vui lòng kiểm tra lại giỏ hàng của bạn.");
         } finally {
             console.groupEnd();
         }
     });
     
+    function showErrorMessage(message) {
+        const toast = document.getElementById("error-toast");
+        const messageSpan = document.getElementById("error-message");
+      
+        messageSpan.innerText = `✗ ${message}`;
+        toast.classList.remove("d-none");
+      
+        setTimeout(() => {
+          toast.classList.add("d-none");
+        }, 3000);
+      }
     // Hàm hiển thị modal thành công
     function showOrderSuccessModal(orderId) {
         // Tạo modal HTML
