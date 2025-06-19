@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Tìm Kiếm - Fashion Style</title>
+    <link rel="stylesheet" href="/src/main/webapp/assets/css/search-results.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header"></div>
+
+    <!-- Search Results Content -->
+    <div class="search-results-container">
+        <h2>Kết Quả Tìm Kiếm</h2>
+        <p>Kết quả cho từ khóa: <strong id="searchKeyword"></strong></p>
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Đang tải...</span>
+            </div>
+        </div>
+        <div class="row" id="searchResultsList"></div>
+    </div>
+
+    <!-- Footer Container -->
+    <div id="footer"></div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/main/webapp/assets/js/search-results.js"></script>
+</body>
+</html>

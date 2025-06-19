@@ -18,6 +18,12 @@
                 <div class="d-flex align-items-center">
                     <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</button>
+                    <!-- Biểu tượng tìm kiếm -->
+                    <div class="search-icon ms-2">
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
                     <div class="profile-icon d-none" id="profileIcon">
                         <img src="https://cdn-icons-png.flaticon.com/512/6858/6858504.png" alt="Profile" class="avatar-img">
                     </div>
@@ -63,82 +69,107 @@
           </div>
       </div>
     </div>
-        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="registerModalLabel">Đăng Ký Fashion Style</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form id="registerForm">
-                    <!-- Họ và tên -->
-                    <div class="mb-3">
-                      <label for="registerFullname" class="form-label">Họ và tên</label>
-                      <input type="text" class="form-control" id="registerFullname">
+      <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Đăng Ký Fashion Style</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="registerForm">
+                  <!-- Họ và tên -->
+                  <div class="mb-3">
+                    <label for="registerFullname" class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" id="registerFullname">
+                  </div>
+                  
+                  <!-- Email -->
+                  <div class="mb-3">
+                    <label for="registerEmail" class="form-label">Địa chỉ Email</label>
+                    <input type="email" class="form-control" id="registerEmail" >
+                    <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                  </div>
+                  
+                  <!-- Mật khẩu -->
+                  <div class="mb-3">
+                    <label for="registerPassword" class="form-label">Mật khẩu (tối thiểu 6 ký tự)</label>
+                    <input type="password" class="form-control" id="registerPassword">
+                  </div>
+                  
+                  <!-- Xác nhận mật khẩu -->
+                  <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                    <input type="password" class="form-control" id="confirmPassword">
+                    <div id="passwordError" class="invalid-feedback" style="display: none">
+                      Mật khẩu không khớp!
                     </div>
-                    
-                    <!-- Email -->
-                    <div class="mb-3">
-                      <label for="registerEmail" class="form-label">Địa chỉ Email</label>
-                      <input type="email" class="form-control" id="registerEmail" >
-                      <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                  </div>
+                  
+                  <!-- Số điện thoại -->
+                  <div class="mb-3">
+                    <label for="registerPhone" class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control" id="registerPhone">
+                  </div>
+                  
+                  <!-- Địa chỉ -->
+                  <div class="mb-3">
+                    <label for="registerAddress" class="form-label">Địa chỉ</label>
+                    <input type="text" class="form-control" id="registerAddress">
+                  </div>
+                  
+                  <!-- Giới tính -->
+                  <div class="mb-3">
+                    <label class="form-label">Giới tính</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="registerGender" id="registerGenderMale" value="male">
+                      <label class="form-check-label" for="registerGenderMale">Nam</label>
                     </div>
-                    
-                    <!-- Mật khẩu -->
-                    <div class="mb-3">
-                      <label for="registerPassword" class="form-label">Mật khẩu (tối thiểu 6 ký tự)</label>
-                      <input type="password" class="form-control" id="registerPassword">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="registerGender" id="registerGenderFemale" value="female">
+                      <label class="form-check-label" for="registerGenderFemale">Nữ</label>
                     </div>
-                    
-                    <!-- Xác nhận mật khẩu -->
-                    <div class="mb-3">
-                      <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
-                      <input type="password" class="form-control" id="confirmPassword">
-                      <div id="passwordError" class="invalid-feedback" style="display: none">
-                        Mật khẩu không khớp!
-                      </div>
-                    </div>
-                    
-                    <!-- Số điện thoại -->
-                    <div class="mb-3">
-                      <label for="registerPhone" class="form-label">Số điện thoại</label>
-                      <input type="tel" class="form-control" id="registerPhone">
-                    </div>
-                    
-                    <!-- Địa chỉ -->
-                    <div class="mb-3">
-                      <label for="registerAddress" class="form-label">Địa chỉ</label>
-                      <input type="text" class="form-control" id="registerAddress">
-                    </div>
-                    
-                    <!-- Giới tính -->
-                    <div class="mb-3">
-                      <label class="form-label">Giới tính</label>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="registerGender" id="registerGenderMale" value="male">
-                        <label class="form-check-label" for="registerGenderMale">Nam</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="registerGender" id="registerGenderFemale" value="female">
-                        <label class="form-check-label" for="registerGenderFemale">Nữ</label>
-                      </div>
-                    </div>
-                    
-                    <!-- Ngày sinh -->
-                    <div class="mb-3">
-                      <label for="registerBirthday" class="form-label">Ngày sinh</label>
-                      <input type="date" class="form-control" id="registerBirthday">
-                    </div>
-                    
-                    <!-- Thông báo -->
-                    <div id="registerMessage" class="mb-3 alert" style="display: none"></div>
-                    
-                    <!-- Nút đăng ký -->
-                    <button type="submit" class="btn btn-primary w-100 register" id="registerBtn">Đăng Ký</button>
-                  </form>
-                </div>
+                  </div>
+                  
+                  <!-- Ngày sinh -->
+                  <div class="mb-3">
+                    <label for="registerBirthday" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control" id="registerBirthday">
+                  </div>
+                  
+                  <!-- Thông báo -->
+                  <div id="registerMessage" class="mb-3 alert" style="display: none"></div>
+                  
+                  <!-- Nút đăng ký -->
+                  <button type="submit" class="btn btn-primary w-100 register" id="registerBtn">Đăng Ký</button>
+                </form>
               </div>
             </div>
           </div>
-    </div>
+        </div>
+
+        <!-- Modal Search -->
+      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="searchModalLabel">Tìm Kiếm Sản Phẩm</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="searchForm" action="/src/main/webapp/pages/search-results.html" method="GET">
+                          <div class="mb-3">
+                              <div class="input-group">
+                                  <input type="text" class="form-control" id="searchInput" name="keyword" placeholder="Nhập tên sản phẩm..." required>
+                                  <button class="btn btn-primary" type="submit">
+                                      <i class="bi bi-search"></i> Tìm
+                                  </button>
+                              </div>
+                          </div>
+                      </form>
+                      <div id="searchResults" class="mt-3"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>

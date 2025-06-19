@@ -1,135 +1,10 @@
-.navbar {
-    background-color: var(--background);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.navbar-brand {
-    font-size: 24px;
-    color: #000;
-    font-weight: 700;
-}
-
-.navbar-brand span {
-    color: #d4a373;
-}
-
-.navbar-toggler {
-    border: none;
-}
-
-.navbar-toggler:focus {
-    box-shadow: none;
-}
-.navbar-nav .nav-link {
-    color: var(--foreground, #666); /* Sử dụng var(--foreground) nếu có, mặc định #666 */
-    font-size: 18px;
-    margin: 0 10px;
-    transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    color: var(--primary, #d4a373); /* Sử dụng var(--primary) nếu có, mặc định #d4a373 */
-}
-
-/* Cải thiện avatar-img */
-.avatar-img {
-    width: 48px; /* Tăng nhẹ kích thước cho cân đối */
-    height: 48px;
-    border-radius: 50%; /* Giữ hình tròn */
-    border: 2px solid var(--primary); /* Thêm viền màu chính */
-    padding: 2px; /* Tạo khoảng cách giữa viền và ảnh */
-    background-color: #fff; /* Nền trắng để nổi bật */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng mượt mà */
-}
-
-.avatar-img:hover {
-    transform: scale(1.1); /* Phóng to nhẹ khi hover */
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Thêm bóng */
-}
-
-/* Cải thiện cart-img */
-.cart-img {
-    width: 48px; /* Đồng bộ kích thước với avatar */
-    height: 48px;
-    padding: 2px;
-    border: 2px solid var(--foreground); /* Viền màu chữ mặc định */
-    border-radius: 8px; /* Bo góc nhẹ thay vì tròn hoàn toàn */
-    background-color: #fff; /* Nền trắng */
-    transition: transform 0.3s ease, border-color 0.3s ease; /* Hiệu ứng mượt mà */
-}
-
-.cart-img:hover {
-    transform: scale(1.1); /* Phóng to nhẹ khi hover */
-    border-color: var(--primary); /* Đổi màu viền khi hover */
-}
-
-#cartIcon {
-    position: relative;
-    display: flex; /* Đảm bảo căn chỉnh tốt hơn */
-    align-items: center;
-}
-
-#cartCount {
-    position: absolute;
-    top: -8px; /* Dịch lên cao hơn một chút */
-    right: -12px; /* Dịch sang phải hơn */
-    font-size: 0.75rem;
-    padding: 2px 6px;
-    background-color: var(--primary); /* Nền màu chính */
-    color: #fff; /* Chữ trắng */
-    border-radius: 50%; /* Hình tròn */
-    font-weight: bold; /* Đậm hơn */
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); /* Thêm bóng nhẹ */
-}
-
-@media (max-width: 768px) {
-    .navbar-nav {
-        text-align: center;
-    }
-    
-    .avatar-img, .cart-img {
-        width: 28px; /* Giảm nhẹ kích thước trên mobile */
-        height: 28px;
-    }
-    
-    #cartCount {
-        top: -6px; /* Điều chỉnh lại vị trí trên mobile */
-        right: -10px;
-    }
-}
-@media (max-width: 768px) {
-    /* Header Responsive */
-    .header-top {
-        flex-direction: column;
-        text-align: center;
-    }
-    .slogan {
-        margin-top: 10px;
-    }
-    .navbar-nav {
-        text-align: center;
-    }
-    .cart-icon {
-        margin-left: 10px;
-    }
-    /* Main*/
-    .carousel-item img {
-        height: 300px;
-    }
-    .category-card img, .product-card img {
-        height: 150px;
-    }
-    .navbar-nav {
-        text-align: center;
-    }
-
-}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+
 .navbar {
     background-color: #fff;
     padding: 15px 30px;
@@ -149,15 +24,24 @@
     color: #d4a373;
 }
 
-.nav-link {
-    color: #666;
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-nav .nav-link {
+    color: var(--foreground, #666);
     font-size: 14px;
     margin: 0 10px;
     transition: color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link.active {
-    color: #d4a373;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary, #d4a373);
 }
 
 .btn-outline-primary {
@@ -169,9 +53,9 @@
 }
 
 .btn-outline-primary:hover {
-    background-color: #d4a373 !important;
-    color: #fff !important;
-    border-color: #d4a373 !important;
+    background-color: #d4a373;
+    color: #fff;
+    border-color: #d4a373;
 }
 
 .btn-primary {
@@ -188,46 +72,94 @@
     border-color: #b88a5d;
 }
 
+.search-icon {
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.search-icon .btn-outline-secondary {
+    padding: 8px;
+    line-height: 1;
+}
+
 .profile-icon {
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .avatar-img {
-    width: 40px;
-    height: 40px;
+    width: 36px; /* Giảm từ 40px để đồng bộ kích thước */
+    height: 36px;
     border-radius: 50%;
     border: 2px solid #d4a373;
+    padding: 2px;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .cart-icon {
     cursor: pointer;
     position: relative;
-    margin-left: 15px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 .cart-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 36px; /* Đồng bộ với avatar-img */
+    height: 36px;
+    border-radius: 8px;
     border: 2px solid #d4a373;
+    padding: 3px; /* Tăng padding nhẹ để icon bên trong nhỏ hơn */
+    background-color: #fff;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.cart-img:hover {
+    transform: scale(1.1);
+    border-color: #b88a5d;
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -4px; /* Điều chỉnh vị trí cho cân đối */
+    right: -4px;
     background-color: #d4a373;
     color: #fff;
-    font-size: 12px;
-    width: 18px;
-    height: 18px;
+    font-size: 10px; /* Giảm từ 12px để nhỏ hơn */
+    width: 16px; /* Giảm từ 18px */
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Error message styles */
+#searchInput {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+#searchResults {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}
+
 .alert-danger {
     background-color: #f8d7da;
     color: #721c24;
@@ -237,26 +169,40 @@
     margin-bottom: 1rem;
 }
 
-/* Loading spinner */
-.spinner-border {
-    vertical-align: middle;
-    margin-right: 0.5rem;
-}
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px;
+    }
 
-/* Invalid input styles */
-.is-invalid {
-    border-color: #dc3545 !important;
-}
+    .navbar-nav {
+        text-align: center;
+        margin-top: 10px;
+    }
 
-.invalid-feedback {
-    display: none;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 0.875em;
-    color: #dc3545;
-}
+    .navbar-nav .nav-link {
+        margin: 5px 0;
+        font-size: 14px;
+    }
 
-.was-validated .form-control:invalid ~ .invalid-feedback,
-.was-validated .form-control:invalid:focus ~ .invalid-feedback {
-    display: block;
+    .btn-outline-primary, .btn-primary {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .search-icon, .profile-icon, .cart-icon {
+        margin: 5px;
+    }
+
+    .avatar-img, .cart-img {
+        width: 30px; /* Giảm từ 32px để nhỏ hơn trên mobile */
+        height: 30px;
+    }
+
+    .cart-count {
+        top: -3px;
+        right: -3px;
+        width: 14px; /* Giảm từ 16px */
+        height: 14px;
+        font-size: 9px; /* Giảm từ 10px */
+    }
 }

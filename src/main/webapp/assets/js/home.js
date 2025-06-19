@@ -6,8 +6,8 @@ loadComponent("header", "/src/main/webapp/components/header.html", function () {
         console.log("header.js đã load xong và chạy setupLogin");
     };
     document.body.appendChild(script);
-  });
-  loadComponent("footer", "/src/main/webapp/components/footer.html");
+});
+loadComponent("footer", "/src/main/webapp/components/footer.html");
   
 // src/main/webapp/assets/js/home.js
 document.addEventListener("DOMContentLoaded", async function () {
