@@ -5,6 +5,11 @@ function updateLoginUI(isLoggedIn, loginBtn, registerBtn, profileIcon, cartIcon)
     if (profileIcon) profileIcon.style.display = isLoggedIn ? 'block' : 'none';
     if (cartIcon) cartIcon.style.display = isLoggedIn ? 'block' : 'none';
 }
+document.addEventListener("DOMContentLoaded", async () => {
+    const userData = await fetchUserData(); // gọi càng sớm càng tốt
+    updateProfileInfo(userData);            // cập nhật vào UI
+    toggleEditMode(true);
+});
 
 // Hàm đăng xuất toàn diện
 async function logout() {
@@ -40,6 +45,8 @@ async function logout() {
 
 // Gắn sự kiện cho nút đăng xuất
 document.getElementById("logout").addEventListener("click", logout);
+
+
 async function fetchUserData() {
     try {
         console.log("[1] Bắt đầu lấy dữ liệu người dùng");
@@ -65,9 +72,9 @@ async function fetchUserData() {
             return;
         }
 
-        console.log("[6] Chuẩn bị gọi API với URL:", `http://localhost:8080/api/users/${userId}`);
+        console.log("[6] Chuẩn bị gọi API với URL:", `http://localhost:8080/api/users/account${userId}`);
         
-        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+        const response = await fetch(`http://localhost:8080/api/users/account`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
